@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useRef } from "react";
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 import InputGroup from "react-bootstrap/InputGroup";
@@ -8,22 +9,54 @@ const NewProductForm = (props) => {
   const priceInputRef = useRef();
   const descriptionInputRef = useRef();
 
+  const [enteredName, setEnteredName] = useState("");
+  const [enteredNameIsValid, setEnteredNameIsValid] = useState(true);
+  const [enteredNameTouched, setEnteredNameTouched] = useState(false);
+
+  const titleInputChangehandler = (e) => {
+    setEnteredName(e.target.value);
+    if (e.target.value.trim() !== "") {
+      setEnteredNameIsValid(true);
+    }
+  };
+
+  const nameInputBlurHandler = (e) => {
+    setEnteredNameTouched(true);
+    if (enteredName.trim() === "") {
+      setEnteredNameIsValid(false);
+    }
+  };
+
   const submitHandler = (e) => {
     e.preventDefault();
+    setEnteredNameTouched(true);
+
+    //to stop the submit when the form is empty.
+    if (enteredName.trim() === "") {
+      setEnteredNameIsValid(false);
+      return;
+    }
+
+    setEnteredNameIsValid(true);
+
     const enteredTitle = titleInputRef.current.value;
     const enteredImage = imageInputRef.current.value;
     const enteredPrice = priceInputRef.current.value;
     const enteredDescription = descriptionInputRef.current.value;
-
     const productData = {
       title: enteredTitle,
       image: enteredImage,
       price: enteredPrice,
       description: enteredDescription,
     };
-
     props.onAddProduct(productData);
+    // setEnteredTitleName('');
   };
+
+  const nameInputIsInvalid = !enteredNameIsValid && enteredNameTouched;
+  const nameInputClasses = !enteredNameIsValid
+    ? "form-control invalid"
+    : "form-control";
 
   return (
     <Container>
@@ -32,14 +65,20 @@ const NewProductForm = (props) => {
           <Col>
             <Form onSubmit={submitHandler}>
               <Row className="mb-3">
-                <Col>
+                <Col className={nameInputClasses}>
                   <Form.Group as={Col} controlId="formGridName">
                     <Form.Label>Product Name</Form.Label>
                     <Form.Control
                       type="text"
                       placeholder="Enter Product Name"
                       ref={titleInputRef}
+                      onChange={titleInputChangehandler}
+                      onBlur={nameInputBlurHandler}
+                      value={enteredName}
                     />
+                    {nameInputIsInvalid && (
+                      <p className="error-text">Please enter product Name!</p>
+                    )}
                   </Form.Group>
                 </Col>
                 <Col>
