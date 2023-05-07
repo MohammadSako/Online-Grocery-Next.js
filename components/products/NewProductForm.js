@@ -1,7 +1,7 @@
-import { useState } from "react";
 import { useRef } from "react";
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 import InputGroup from "react-bootstrap/InputGroup";
+import useInput from "./layout/use-input";
 
 const NewProductForm = (props) => {
   const titleInputRef = useRef();
@@ -9,35 +9,64 @@ const NewProductForm = (props) => {
   const priceInputRef = useRef();
   const descriptionInputRef = useRef();
 
-  const [enteredName, setEnteredName] = useState("");
-  const [enteredNameIsValid, setEnteredNameIsValid] = useState(true);
-  const [enteredNameTouched, setEnteredNameTouched] = useState(false);
+  //Title
+  const {
+    value: enteredName,
+    isValid: enteredNameIsValid,
+    hasError: nameInputHasError,
+    valueChangeHandler: nameChangeHandler,
+    inputBlurHandler: nameBlurHandler,
+    reset: resetNameInput,
+  } = useInput((value) => value.trim() !== "");
+  //Price
+  const {
+    value: enteredPrice,
+    isValid: enteredPriceIsValid,
+    hasError: priceInputHasError,
+    valueChangeHandler: priceChangeHandler,
+    inputBlurHandler: priceBlurHandler,
+    reset: resetPriceInput,
+  } = useInput((value) => value.trim() !== "");
+  //Image
+  const {
+    value: enteredImage,
+    isValid: enteredImageIsValid,
+    hasError: imageInputHasError,
+    valueChangeHandler: imageChangeHandler,
+    inputBlurHandler: imageBlurHandler,
+    reset: resetImageInput,
+  } = useInput((value) => value.trim() !== "");
+  //Description
+  const {
+    value: enteredDescription,
+    isValid: enteredDescriptionIsValid,
+    hasError: descriptionInputHasError,
+    valueChangeHandler: descriptionChangeHandler,
+    inputBlurHandler: descriptionBlurHandler,
+    reset: resetDescriptionInput,
+  } = useInput((value) => value.trim() !== "");
 
-  const titleInputChangehandler = (e) => {
-    setEnteredName(e.target.value);
-    if (e.target.value.trim() !== "") {
-      setEnteredNameIsValid(true);
-    }
-  };
-
-  const nameInputBlurHandler = (e) => {
-    setEnteredNameTouched(true);
-    if (enteredName.trim() === "") {
-      setEnteredNameIsValid(false);
-    }
-  };
+  let formIsValid = false;
+  if (
+    enteredNameIsValid &&
+    enteredPriceIsValid &&
+    enteredImageIsValid &&
+    enteredDescriptionIsValid
+  ) {
+    formIsValid = true;
+  }
 
   const submitHandler = (e) => {
     e.preventDefault();
-    setEnteredNameTouched(true);
 
-    //to stop the submit when the form is empty.
-    if (enteredName.trim() === "") {
-      setEnteredNameIsValid(false);
+    if (
+      !enteredNameIsValid &&
+      !enteredImageIsValid &&
+      !enteredPriceIsValid &&
+      !enteredDescriptionIsValid
+    ) {
       return;
     }
-
-    setEnteredNameIsValid(true);
 
     const enteredTitle = titleInputRef.current.value;
     const enteredImage = imageInputRef.current.value;
@@ -50,79 +79,106 @@ const NewProductForm = (props) => {
       description: enteredDescription,
     };
     props.onAddProduct(productData);
-    // setEnteredTitleName('');
+
+    resetNameInput;
+    resetPriceInput;
+    resetImageInput;
+    resetDescriptionInput;
   };
 
-  const nameInputIsInvalid = !enteredNameIsValid && enteredNameTouched;
-  const nameInputClasses = !enteredNameIsValid
+  //Css
+  //title
+  const nameInputClasses = nameInputHasError
+    ? "form-control invalid"
+    : "form-control";
+  //price
+  const priceInputClasses = priceInputHasError
+    ? "form-control invalid"
+    : "form-control";
+  //Image
+  const imageInputClasses = imageInputHasError
+    ? "form-control invalid"
+    : "form-control";
+  //Description
+  const descriptionInputClasses = descriptionInputHasError
     ? "form-control invalid"
     : "form-control";
 
   return (
-    <Container>
-      <Card className="mt-3 p-3">
-        <Row>
-          <Col>
-            <Form onSubmit={submitHandler}>
-              <Row className="mb-3">
-                <Col className={nameInputClasses}>
-                  <Form.Group as={Col} controlId="formGridName">
-                    <Form.Label>Product Name</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Enter Product Name"
-                      ref={titleInputRef}
-                      onChange={titleInputChangehandler}
-                      onBlur={nameInputBlurHandler}
-                      value={enteredName}
-                    />
-                    {nameInputIsInvalid && (
-                      <p className="error-text">Please enter product Name!</p>
-                    )}
-                  </Form.Group>
-                </Col>
-                <Col>
-                  <Form.Label>Product Price</Form.Label>
-
-                  <InputGroup className="mb-3">
-                    <Form.Control
-                      aria-label="Amount (to the nearest dollar)"
-                      placeholder="Enter the price"
-                      ref={priceInputRef}
-                    />
-                    <InputGroup.Text>JD</InputGroup.Text>
-                  </InputGroup>
-                </Col>{" "}
-              </Row>
-
-              <Form.Group className="mb-3" controlId="formGridProductImage">
-                <Form.Label>Product image</Form.Label>
-                <Form.Control
-                  placeholder="Insert Image URL"
-                  ref={imageInputRef}
-                />
-              </Form.Group>
-
-              <Form.Group
-                className="mb-3"
-                controlId="exampleForm.ControlTextarea1"
-              >
-                <Form.Label>Product Description</Form.Label>
-                <Form.Control
-                  as="textarea"
-                  rows={3}
-                  placeholder="Enter Product Description"
-                  ref={descriptionInputRef}
-                />
-              </Form.Group>
-
-              <Button variant="primary" type="submit">
-                Submit
-              </Button>
-            </Form>
-          </Col>
-        </Row>
-      </Card>{" "}
+    <Container style={{ marginTop: 25, maxWidth: 600 }}>
+      <Form onSubmit={submitHandler}>
+        <Col style={{ marginBottom: 15 }} className={nameInputClasses}>
+          <Form.Group as={Col} controlId="formGridName">
+            <Form.Label>Product Name</Form.Label>
+            <Form.Control
+              style={{ marginBottom: 15 }}
+              type="text"
+              placeholder="enter product name"
+              ref={titleInputRef}
+              onChange={nameChangeHandler}
+              onBlur={nameBlurHandler}
+              value={enteredName}
+            />
+            {nameInputHasError && (
+              <p className="error-text">Please enter product name!</p>
+            )}
+          </Form.Group>
+        </Col>
+        <Col style={{ marginBottom: 15 }} className={priceInputClasses}>
+          <Form.Label>Product Price</Form.Label>
+          <InputGroup className="mb-3">
+            <Form.Control
+              aria-label="Amount (to the nearest dollar)"
+              placeholder="enter product price"
+              ref={priceInputRef}
+              onChange={priceChangeHandler}
+              onBlur={priceBlurHandler}
+              value={enteredPrice}
+            />
+            <InputGroup.Text>JD</InputGroup.Text>
+          </InputGroup>
+          {priceInputHasError && (
+            <p className="error-text">Please enter product price!</p>
+          )}
+        </Col>
+        <Col style={{ marginBottom: 15 }} className={imageInputClasses}>
+          <Form.Group className="mb-3" controlId="formGridProductImage">
+            <Form.Label>Product image</Form.Label>
+            <Form.Control
+              placeholder="insert image URL"
+              ref={imageInputRef}
+              onChange={imageChangeHandler}
+              onBlur={imageBlurHandler}
+              value={enteredImage}
+            />
+            {imageInputHasError && (
+              <p className="error-text">Please insert product image!</p>
+            )}
+          </Form.Group>
+        </Col>
+        <Col style={{ marginBottom: 15 }} className={descriptionInputClasses}>
+          <Form.Group as={Col} controlId="formGridName">
+            <Form.Label>Product Description</Form.Label>
+            <Form.Control
+              style={{ marginBottom: 15 }}
+              type="text"
+              placeholder="enter product description"
+              ref={descriptionInputRef}
+              onChange={descriptionChangeHandler}
+              onBlur={descriptionBlurHandler}
+              value={enteredDescription}
+            />
+            {descriptionInputHasError && (
+              <p className="error-text">Please write product description!</p>
+            )}
+          </Form.Group>
+        </Col>
+        <Col>
+          <Button disabled={!formIsValid} variant="primary" type="submit">
+            Submit
+          </Button>
+        </Col>
+      </Form>
     </Container>
   );
 };
