@@ -6,7 +6,7 @@ import Card from "react-bootstrap/Card";
 const ProductDetail = (props) => {
   return (
     <Container>
-      <Card>
+      <Card style={{ marginBottom: 10 }}>
         <Row>
           <Col>
             <Card.Img
@@ -50,6 +50,14 @@ const ProductDetail = (props) => {
           </Col>
         </Row>
       </Card>
+
+      <Row>
+        <Col>
+          <Link href="/">
+            <Button variant="danger">Delete Product</Button>
+          </Link>
+        </Col>
+      </Row>
     </Container>
   );
 };

@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
+import { Button, Col, Container, Form } from "react-bootstrap";
 import InputGroup from "react-bootstrap/InputGroup";
 import useInput from "./layout/use-input";
 
@@ -106,6 +106,8 @@ const NewProductForm = (props) => {
 
   return (
     <Container style={{ marginTop: 25, maxWidth: 600 }}>
+      <h3 style={{ marginBottom: 20 }}>Add a Product</h3>
+
       <Form onSubmit={submitHandler}>
         <Col style={{ marginBottom: 15 }} className={nameInputClasses}>
           <Form.Group as={Col} controlId="formGridName">

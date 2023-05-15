@@ -3,32 +3,7 @@ import { MongoClient } from "mongodb";
 import ProductsList from "../components/products/ProductsList";
 import { Fragment } from "react";
 import Head from "next/head";
-// const Dummy_items = [
-//   {
-//     id: "p1",
-//     title: "Orange",
-//     description: "Fresh Orange",
-//     image:
-//       "https://res.cloudinary.com/dai7hljsg/image/upload/v1665919496/market/xrjz29hcnntpzeeowydv.jpg",
-//     price: 1,
-//   },
-//   {
-//     id: "p2",
-//     title: "Strawberry",
-//     description: "Fresh Strawberry",
-//     image:
-//       "https://res.cloudinary.com/dai7hljsg/image/upload/v1665920515/market/ewxaontxiwiwowpvb5ap.jpg",
-//     price: 3,
-//   },
-//   {
-//     id: "p3",
-//     title: "Pasion Fruit",
-//     description: "Organic Pasion Fruit",
-//     image:
-//       "https://res.cloudinary.com/dai7hljsg/image/upload/v1665919536/market/qsem7hanwje3t5yudsaa.jpg",
-//     price: 2,
-//   },
-// ];
+
 const HomePage = (props) => {
   return (
     <Fragment>
