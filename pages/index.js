@@ -1,8 +1,9 @@
 // our-domain.com/
 import { MongoClient } from "mongodb";
-import ProductsList from "../components/products/ProductsList";
+import ProductsList from "../components/ProductsItem/ProductsList";
 import { Fragment } from "react";
 import Head from "next/head";
+import "mapbox-gl/dist/mapbox-gl.css";
 
 const HomePage = (props) => {
   return (

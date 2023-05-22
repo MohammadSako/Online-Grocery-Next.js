@@ -4,11 +4,18 @@ import Head from "next/head";
 import { useRef } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import useInput from "../../components/products/layout/use-input";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 const NewUser = (props) => {
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
 
+
+const {data:session} = useSession();
+  console.log(session);
+
+
+  
   //Email
   const {
     value: enteredEmail,
@@ -114,12 +121,8 @@ const NewUser = (props) => {
             <div>
               Dont have an account yet? <p>Register Here</p>
             </div>
-            {/* {ifSession && `Signed in as ${session.user.email} <br />`} */}
-            {/* {ifSession && <button onClick={() => signOut()}>Sign out</button>} */}
-            {/* <Button variant="primary" type="submit" onClick={() => signIn()}>
-                Login with Company Account
-              </Button>{" "} */}
           </Form>
+          <a href="" onClick={() => signIn()}>login with your Google account</a>
         </Col>
       </Row>
     </Container>

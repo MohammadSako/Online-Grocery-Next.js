@@ -2,8 +2,10 @@ import { useRef } from "react";
 import { Button, Col, Container, Form } from "react-bootstrap";
 import InputGroup from "react-bootstrap/InputGroup";
 import useInput from "./layout/use-input";
+import { useRouter } from "next/router";
 
 const NewProductForm = (props) => {
+  const router = useRouter();
   const titleInputRef = useRef();
   const imageInputRef = useRef();
   const priceInputRef = useRef();
@@ -84,6 +86,8 @@ const NewProductForm = (props) => {
     resetPriceInput;
     resetImageInput;
     resetDescriptionInput;
+
+    router.push('/'); //to go back to the list page
   };
 
   //Css

@@ -1,0 +1,29 @@
+.container {
+  width: 100%;
+  position: relative;
+  height: 200;
+  padding: 50px 0 10px 0;
+}
+
+.row {
+  padding-left: 20px;
+  margin-top: 10px;
+}
+.span {
+  font-weight: 600;
+}
+/* 
+li {
+  list-style: none;
+  text-indent: -30px;
+  color: rgb(74, 73, 73);
+  cursor: pointer;
+}
+
+p {
+  cursor: pointer;
+}
+
+p :hover {
+  color: rgb(116, 112, 112);
+} */

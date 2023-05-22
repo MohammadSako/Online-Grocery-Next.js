@@ -2,8 +2,17 @@ import Link from "next/link";
 import { Col, Container, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import { useSession } from "next-auth/react";
 
 const ProductDetail = (props) => {
+  const { data: session } = useSession();
+
+  // const removeProduct = () => {
+  //   const e = props;
+  //   // console.log(e);
+  //   props.onRemoveProduct(e);
+  // };
+
   return (
     <Container>
       <Card style={{ marginBottom: 10 }}>
@@ -51,13 +60,19 @@ const ProductDetail = (props) => {
         </Row>
       </Card>
 
-      <Row>
-        <Col>
-          <Link href="/">
-            <Button variant="danger">Delete Product</Button>
-          </Link>
-        </Col>
-      </Row>
+      {!session &&<p>Log in to delete the product</p>}
+
+      {/* {session && (
+        <Row>
+          <Col>
+            <Link href="/">
+              <Button variant="danger" onClick={removeProduct}>
+                Delete Product
+              </Button>
+            </Link>
+          </Col>
+        </Row>
+      )} */}
     </Container>
   );
 };

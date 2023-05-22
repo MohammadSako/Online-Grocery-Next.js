@@ -7,7 +7,6 @@ import NewProductForm from "../../components/products/NewProductForm";
 function NewProductPage() {
   const router = useRouter();
   async function addProductHandler(e) {
-    console.log(e);
     const response = await fetch("/api/new-product", {
       method: "POST",
       body: JSON.stringify(e),
@@ -20,7 +19,7 @@ function NewProductPage() {
 
     router.push('/'); //to go back to the list page
   };
-
+  
   return (
     <Fragment>
       <Head>

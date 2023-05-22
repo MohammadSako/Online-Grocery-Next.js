@@ -1,0 +1,15 @@
+.line {
+  border-top: 1px solid #d3d3d3;
+  position: relative;
+}
+
+.row {
+  padding: 1rem 0;
+}
+
+.image {
+  height: 5.75rem;
+  max-height: 5.75rem;
+  max-width: 5.75rem;
+  width: 5.75rem;
+}
