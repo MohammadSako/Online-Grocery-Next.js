@@ -6,7 +6,7 @@ import { Button } from "react-bootstrap";
 import { RiSecurePaymentLine } from "react-icons/ri";
 import { TbTruckReturn } from "react-icons/tb";
 import Classes from "./OrderSummary.module.css";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 const OrderSummary = (props) => {
   const dispatch = useDispatch();
@@ -52,7 +52,7 @@ const OrderSummary = (props) => {
         <p className={Classes.productUnderLineP}>
           By clicking check out youre agreeing to our Privacy Policy
         </p>
-        <Link to='/checkout'>
+        <Link href="/checkout">
           <Button className={Classes.checkoutBtn} variant="primary">
             Go to checkout
           </Button>
@@ -69,9 +69,11 @@ const OrderSummary = (props) => {
           </span>
         </p>
       </Row>
-      <Button className={Classes.button} variant="outline-primary">
-        Back
-      </Button>
+      <Link href="/">
+        <Button className={Classes.button} variant="outline-primary">
+          Back
+        </Button>
+      </Link>
     </div>
   );
 };

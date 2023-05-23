@@ -3,10 +3,10 @@ import Table from "react-bootstrap/Table";
 import { useSelector } from "react-redux";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Classes from "./Checkout.module.css";
+import Classes from "./index.module.css";
 import Container from "react-bootstrap/Container";
-import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import Link from "next/link";
 
 const Checkout = () => {
   const cartItems = useSelector((state) => state.cart.items);
@@ -90,7 +90,7 @@ const Checkout = () => {
           <p>* Only the selected items above will be assembled upon delivery</p>
         </Col>
       </Row>
-      <Link to="/cartpage">
+      <Link href="/cart">
         <Button
           style={{ marginBottom: 30 }}
           className={Classes.checkoutBtn}

@@ -1,95 +1,75 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
-import { useEffect } from "react";
-import classes from "./Cart.module.css";
-import CartItem from "../../components/Cart/CartItem";
-import { Button, Container, Row } from "react-bootstrap";
-import { cartActions } from "../../store/cart-slice";
-import Col from "react-bootstrap/Col";
+import { useEffect,useState } from "react";
 import { Link } from "react-router-dom";
+import { cartActions } from "../../store/cart-slice";
+import CartItem from "../../components/Cart/CartItem";
+import OrderSummary from "../../components/Cart/OrderSummary";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Classes from "./index.module.css";
+import { Button } from "react-bootstrap";
 
-const Cart = (props) => {
+const CartPage = (props) => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
-  const totalAllPrices = useSelector((state) => state.cart.totalAllPrice);
-  const cartQuantity = useSelector((state) => state.cart.totalQuantity);
   const totalItems = useSelector((state) => state.cart.totalQuantity);
-
-  //Cart Empty Msg
-  const [cartEmpty, setCartEmpty] = useState(true);
-  useEffect(() => {
-    if (cartQuantity > 0) {
-      setCartEmpty(false);
-    }
-    if (cartQuantity === 0) {
-      setCartEmpty(true);
-    }
-  }, [cartQuantity]);
+  const [cartEmpty, setCartEmpty] = useState(false);
 
   //SubTotal
   useEffect(() => {
     dispatch(cartActions.totalAllItems());
-  }, [cartItems, dispatch]);
+    if (totalItems === 0) {
+      setCartEmpty(true);
+    }
+  }, [cartItems, totalItems, dispatch]);
 
   return (
-    <Container style={{ marginTop: 30 }}>
-      <Row>
-        {!cartEmpty && (
-          <Col>
-            <h2>Cart Items</h2>
-            <h6>{totalItems} items in total</h6>
-          </Col>
-        )}
-        {cartEmpty && <h3>Cart is Empty</h3>}
-        
-      </Row>
-
-      {!cartEmpty && (
-        <Row className={classes["cart-items"]}>
-          {cartItems.map((item) => (
-            <CartItem
-              key={item.id}
-              item={{
-                id: item.id,
-                name: item.name,
-                quantity: item.quantity,
-                total: item.totalPrice,
-                price: item.price,
-                image: item.image,
-                discription: item.discription,
-              }}
-            />
-          ))}
-        </Row>
+    <Container className={Classes.container}>
+      {cartEmpty && <h1 style={{ margin: "30px 0 30px 0" }}>Cart is Empty!</h1>}
+      {cartEmpty && (
+        <Link to="/products">
+          <Button
+            style={{ marginBottom: 30 }}
+            className={Classes.checkoutBtn}
+            variant="primary"
+          >
+            Back to the Shop
+          </Button>
+        </Link>
       )}
 
       {!cartEmpty && (
+        <div>
+          <h2 className={Classes.checkout}>Checkout</h2>
+          <p>{totalItems} Items in Total</p>
+        </div>
+      )}
+      {!cartEmpty && (
         <Row>
-          <Col className={classes.actions}>
-            <Link to="/cartpage" onClick={props.onClose}>
-              <Button className={classes.order} variant="outline-primary">
-                View Cart
-              </Button>
-            </Link>
-            <Link to="/Checkout" onClick={props.onClose}>
-              <Button className={classes.order} variant="primary">
-                Checkout
-              </Button>
-            </Link>
-
-            <div className={classes.actionsTotal}>
-              <h3>
-                Subtotal{" "}
-                <span style={{ fontSize: "1.75rem", color: "red" }}>
-                  {totalAllPrices.toFixed(2)}
-                </span>
-                <span style={{ fontSize: "1rem" }}> JD</span>
-              </h3>
-            </div>
+          <Col>
+            {cartItems.map((item) => (
+              <CartItem
+                key={item.id}
+                item={{
+                  id: item.id,
+                  name: item.name,
+                  quantity: item.quantity,
+                  total: item.totalPrice,
+                  price: item.price,
+                  image: item.image,
+                  discription: item.discription,
+                }}
+              />
+            ))}
+          </Col>
+          <Col lg="5">
+            <OrderSummary />
           </Col>
         </Row>
       )}
     </Container>
   );
 };
-export default Cart;
+
+export default CartPage;

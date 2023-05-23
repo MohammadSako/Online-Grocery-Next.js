@@ -87,12 +87,12 @@ function OffCanvasExample({ name, ...props }) {
           {cartEmpty && (
             <Row>
               <Col className={classes.actions}>
-                <Link href="/Cart/CartPage" onClick={props.onClose}>
+                <Link href="/cart">
                   <Button className={classes.order} variant="outline-primary">
                     View Cart
                   </Button>
                 </Link>
-                <Link href="/Cart/Checkout" onClick={props.onClose}>
+                <Link href="/checkout">
                   <Button className={classes.order} variant="primary">
                     Checkout
                   </Button>
@@ -124,15 +124,15 @@ function CollapsibleExample(props) {
   return (
     <Navbar collapseOnSelect expand="md" bg="white" variant="light">
       <Container>
-        <Navbar.Brand href="#home">Next Shop</Navbar.Brand>
+        <Navbar.Brand href="">Next Shop</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/">Home</Nav.Link>
-            {session && <Nav.Link href="/new-product">Add a Product</Nav.Link>}
-            <Nav.Link href="/contact">Contact Us</Nav.Link>
+            <Link href="/">Home</Link>
+            {session && <Link href="/new-product">Add a Product</Link>}
+            <Link href="/contact">Contact Us</Link>
           </Nav>
-          <Nav.Link href="/">
+          <Link href="/">
             {session && (
               <span style={{ marginRight: 5 }}>
                 <img
@@ -146,10 +146,10 @@ function CollapsibleExample(props) {
                 {session.user.email}
               </span>
             )}
-          </Nav.Link>
+          </Link>
           <Nav>
-            {!session && <Nav.Link href="/login">Login</Nav.Link>}
-            {session && <Nav.Link onClick={() => signOut()}>Logout</Nav.Link>}
+            {!session && <Link href="/login">Login</Link>}
+            {session && <Link onClick={() => signOut()}>Logout</Link>}
           </Nav>
 
           <Nav>
@@ -158,9 +158,9 @@ function CollapsibleExample(props) {
             ))}
           </Nav>
           {/* <Nav>
-            <Nav.Link href="/Cart">
+            <Link href="/Cart">
               <HeaderCartButton onClick={props.onShowCart} />
-            </Nav.Link>
+            </Link>
           </Nav> */}
         </Navbar.Collapse>
       </Container>
