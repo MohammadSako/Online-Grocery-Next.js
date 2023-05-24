@@ -31,3 +31,15 @@
   text-align: "end";
   margin: 20px 9px 10px 0;
 }
+
+.link {
+  text-decoration: none;
+  color: black;
+  margin-top: 8px;
+  margin-right: 10px;
+  padding-bottom: 5px;
+}
+
+.link:hover {
+  color:rgb(109, 125, 125);
+}

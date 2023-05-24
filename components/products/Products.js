@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../../store/cart-slice";
+import Classes from './Products.module.css';
 
 const Products = (props) => {
   const router = useRouter();
@@ -29,7 +30,10 @@ const Products = (props) => {
   }
 
   const deleteProduct = async (e) => {
+
+    // const dataId = router.query.productId;
     console.log(e);
+
     const response = await fetch("/api/new-product", {
       method: "DELETE",
       body: JSON.stringify(e),
@@ -44,9 +48,9 @@ const Products = (props) => {
   };
   return (
     <Col style={{ marginTop: 30 }}>
-      <Card style={{ width: "17rem" }}>
+      <Card className={Classes.col}>
         <Card.Img
-          style={{ padding: 50, maxHeight: 250, minHeight: 250 }}
+          style={{ padding:10, height:250, width:250, maxHeight: 250, minHeight: 250 }}
           variant="top"
           src={image}
         />

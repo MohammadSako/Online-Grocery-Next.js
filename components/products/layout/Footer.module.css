@@ -12,18 +12,23 @@
 .span {
   font-weight: 600;
 }
-/* 
-li {
+
+.row li {
   list-style: none;
   text-indent: -30px;
   color: rgb(74, 73, 73);
   cursor: pointer;
 }
 
-p {
+.row li:hover {
+  color: rgb(0, 0, 0);
+  text-shadow: 0px 0px 1px #9e9d9d;
+}
+
+.row p {
   cursor: pointer;
 }
 
-p :hover {
-  color: rgb(116, 112, 112);
-} */
+.row p:hover {
+  color: rgb(108, 108, 108);
+}

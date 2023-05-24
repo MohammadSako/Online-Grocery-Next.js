@@ -42,7 +42,7 @@ const HeaderCartButton = (props) => {
       style={{ cursor: "pointer" }}
       onClick={props.onClick}
     >
-      <BsCart3 size={25} color="#757686" />
+      <BsCart3 size={25} color="#757686"/>
       {cartEmpty && (
         <Badge
           bg="primary"
