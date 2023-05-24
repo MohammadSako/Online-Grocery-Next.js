@@ -68,10 +68,9 @@ const Products = (props) => {
           <Button variant="primary" onClick={addToCartHandler}>
             Add to cart
           </Button>
-          {/* <Button variant="danger" onClick={() => deleteProduct(props)}> */}
-          <Button variant="danger" onClick={() => deleteProduct(id)}>
+          {/* <Button variant="danger" onClick={() => deleteProduct(id)}>
             Delete
-          </Button>
+          </Button> */}
         </Card.Body>
       </Card>
     </Col>
