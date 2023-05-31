@@ -42,5 +42,20 @@
 }
 
 .link:hover {
-  color:rgb(109, 125, 125);
+  color: rgb(109, 125, 125);
+}
+
+.feedback {
+  text-decoration: none;
+  background: radial-gradient(
+    circle,
+    rgba(0, 212, 255, 1) 0%,
+    rgba(0, 212, 255, 1) 1%,
+    rgba(255, 255, 255, 1) 73%
+  );
+  color: #2b4db5;
+  text-align: center;
+  height: 35px;
+  padding: 5px;
+  font-weight: 600px;
 }

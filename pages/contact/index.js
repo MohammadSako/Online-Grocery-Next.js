@@ -1,6 +1,7 @@
 import { Container } from "react-bootstrap";
 import Accordion from "react-bootstrap/Accordion";
 import React, { useRef, useEffect, useState } from "react";
+
 import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
 mapboxgl.accessToken =
   "pk.eyJ1IjoibW9oYW1tYWRtdXJhZCIsImEiOiJjbGdjOGp1bDUwMHU1M2RtbmVyMHZwbm1iIn0.t8yZPXleQUIxIKYHKiqA4w";
