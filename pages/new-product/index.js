@@ -15,7 +15,7 @@ function NewProductPage() {
       },
     });
     const data = await response.json();
-    console.log(data);
+
 
     router.push('/'); //to go back to the list page
   };

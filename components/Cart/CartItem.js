@@ -31,7 +31,7 @@ const CartItem = (props) => {
 
   return (
     <>
-      <div className={Classes.line}>
+      
         <Row className={Classes.row}>
           <Col>
             <Card.Body>
@@ -50,7 +50,11 @@ const CartItem = (props) => {
             </Card.Text>
             <Card.Subtitle className="mb-2 text-muted">
               <h5 className="text-muted">
-                Total: <span style={{ color: "Red" }}>{Number(price * quantity).toFixed(2)}</span> JD
+                Total:{" "}
+                <span style={{ color: "Red" }}>
+                  {Number(price * quantity).toFixed(2)}
+                </span>{" "}
+                JD
               </h5>
             </Card.Subtitle>
             <ButtonGroup className="me-2">
@@ -63,6 +67,7 @@ const CartItem = (props) => {
             </ButtonGroup>
           </Col>
         </Row>
+        <div className={Classes.line}>
       </div>
     </>
   );

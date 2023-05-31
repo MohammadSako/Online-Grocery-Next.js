@@ -3,15 +3,35 @@ import { Col, Container, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
+import { cartActions } from "../../store/cart-slice";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
+import Classes from "./Products.module.css";
 
 const ProductDetail = (props) => {
   const { data: session } = useSession();
+  const { title, price, description, id, image } = props;
+  const router = useRouter();
 
   // const removeProduct = () => {
   //   const e = props;
   //   // console.log(e);
   //   props.onRemoveProduct(e);
   // };
+
+  const dispatch = useDispatch();
+  const addToCartHandler = (e) => {
+    dispatch(
+      cartActions.addItemToCart({
+        id,
+        title,
+        price,
+        description,
+        image,
+      })
+    );
+  };
 
   return (
     <Container>
@@ -43,16 +63,26 @@ const ProductDetail = (props) => {
             <Row>
               <Col>
                 <Card.Body>
-                  <Link href="/">
-                    <Button variant="primary" style={{ marginBottom: 5 }}>
-                      Back
+                  <div className="d-grid gap-2 mt-2">
+                    <Button
+                      className={Classes.buttom}
+                      variant="white"
+                      onClick={addToCartHandler}
+                    >
+                      Add to Cart
                     </Button>
-                  </Link>{" "}
+                  </div>
                   <Link href="/">
-                    <Button variant="primary" style={{ marginBottom: 5 }}>
-                      Add to cart
-                    </Button>
-                  </Link>{" "}
+                    <div className="d-grid gap-2 mt-2">
+                      <Button
+                        className={Classes.buttomB}
+                        variant="white"
+                        onClick={addToCartHandler}
+                      >
+                        Back
+                      </Button>{" "}
+                    </div>
+                  </Link>
                 </Card.Body>
               </Col>
             </Row>
@@ -60,7 +90,13 @@ const ProductDetail = (props) => {
         </Row>
       </Card>
 
-      {!session &&<p>Log in to delete the product</p>}
+      {!session && (
+        <p onClick={() => signIn()}>
+          <i style={{ color: "red", cursor: "pointer" }}>
+            Log in to delete the product
+          </i>
+        </p>
+      )}
 
       {/* {session && (
         <Row>

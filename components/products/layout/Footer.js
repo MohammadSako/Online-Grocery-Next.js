@@ -12,7 +12,7 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <Container className={Classes.container}>
+    <div className={Classes.container}>
       <Row className={Classes.row}>
         <Col lg={3} sm={6}>
           <h6>Online Shop</h6>
@@ -83,16 +83,23 @@ const Footer = () => {
       </Row>
       <hr />
       <Row className={Classes.row}>
-        <Col>
-          <p>
-            <span className={Classes.span}>By:</span> Mohammad Talal Murad Al Shishani 2023
-          </p>
-          <p>
-            <span className={Classes.span}>Email:</span> mohammad.talal.murad@gmail.com
-          </p>
-        </Col>
+        <Link
+          href="https://www.linkedin.com/in/mohammad-murad-850b9970/"
+          target="_blank"
+        >
+          <Col>
+            <p>
+              <span className={Classes.span}>By:</span> Mohammad Talal Murad Al
+              Shishani 2023
+            </p>
+            <p>
+              <span className={Classes.span}>Email:</span>{" "}
+              mohammad.talal.murad@gmail.com
+            </p>
+          </Col>
+        </Link>
       </Row>
-    </Container>
+    </div>
   );
 };
 export default Footer;

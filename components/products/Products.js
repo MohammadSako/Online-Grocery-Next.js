@@ -4,15 +4,17 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../../store/cart-slice";
-import Classes from './Products.module.css';
+import Classes from "./Products.module.css";
+import { useSession } from "next-auth/react";
 
 const Products = (props) => {
   const router = useRouter();
+  const { data: session } = useSession();
 
   const { title, price, description, id, image } = props;
 
   const dispatch = useDispatch();
-  const addToCartHandler = () => {
+  const addToCartHandler = (e) => {
     dispatch(
       cartActions.addItemToCart({
         id,
@@ -30,7 +32,6 @@ const Products = (props) => {
   }
 
   const deleteProduct = async (e) => {
-
     // const dataId = router.query.productId;
     console.log(e);
 
@@ -50,7 +51,8 @@ const Products = (props) => {
     <Col style={{ marginTop: 30 }}>
       <Card className={Classes.col}>
         <Card.Img
-          style={{ padding:10, height:250, width:250, maxHeight: 250, minHeight: 250 }}
+          className={Classes.image}
+          onClick={showDetailHandler}
           variant="top"
           src={image}
         />
@@ -58,19 +60,35 @@ const Products = (props) => {
           <Card.Title>{title}</Card.Title>
           <Card.Title>{Number(price).toFixed(2)} JD</Card.Title>
           <Card.Text>{description} </Card.Text>
-          <Button
-            style={{ marginLeft: 5 }}
-            variant="primary"
-            onClick={showDetailHandler}
-          >
-            Show Details
-          </Button>{" "}
-          <Button variant="primary" onClick={addToCartHandler}>
-            Add to cart
-          </Button>
-          {/* <Button variant="danger" onClick={() => deleteProduct(id)}>
-            Delete
-          </Button> */}
+          <div className="d-grid gap-2 mt-2">
+            <Button
+              className={Classes.buttom}
+              variant="white"
+              onClick={addToCartHandler}
+            >
+              Add to Cart
+            </Button>
+          </div>
+          <div className="d-grid gap-2 mt-2">
+            <Button
+              className={Classes.buttomS}
+              variant="white"
+              onClick={showDetailHandler}
+            >
+              Show Details
+            </Button>
+          </div>
+          {session && (
+            <div className="d-grid gap-2 mt-2">
+              <Button
+                className={Classes.buttomD}
+                variant="white"
+                onClick={deleteProduct}
+              >
+                Delete
+              </Button>
+            </div>
+          )}
         </Card.Body>
       </Card>
     </Col>

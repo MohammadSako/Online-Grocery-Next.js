@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import CartItem from "../../Cart/CartItem";
 import { cartActions } from "../../../store/cart-slice";
 import Link from "next/link";
+import { parseCookies, setCookie, destroyCookie } from "nookies";
 
 const options = [
   {
@@ -27,7 +28,6 @@ function OffCanvasExample({ name, ...props }) {
   const cartQuantity = useSelector((state) => state.cart.totalQuantity);
   const totalItems = useSelector((state) => state.cart.totalQuantity);
   const totalAllPrices = useSelector((state) => state.cart.totalAllPrice);
-
   const [cartEmpty, setCartEmpty] = useState(false);
 
   useEffect(() => {
@@ -36,7 +36,15 @@ function OffCanvasExample({ name, ...props }) {
     } else {
       setCartEmpty(false);
     }
-  }, [cartQuantity]);
+
+    //session //https://github.com/maticzav/nookies
+    const cookies = parseCookies();
+    console.log({ cookies });
+    setCookie(null, "fromClient", cartItems, {
+      maxAge: 30 * 24 * 60 * 60,
+      path: "/",
+    });
+  }, [cartQuantity, cartItems]);
 
   //SubTotal
   useEffect(() => {
@@ -52,17 +60,24 @@ function OffCanvasExample({ name, ...props }) {
       <HeaderCartButton onClick={toggleShow} />
       <Offcanvas show={show} onHide={handleClose} {...props}>
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Cart</Offcanvas.Title>
+          {cartEmpty && (
+            <Offcanvas.Title>
+              <h3>Shopping Cart</h3>
+            </Offcanvas.Title>
+          )}
+          {!cartEmpty && (
+            <Offcanvas.Title>
+              <h3>Cart is empty!</h3>
+            </Offcanvas.Title>
+          )}
         </Offcanvas.Header>
         <Offcanvas.Body>
           <Row>
             {cartEmpty && (
               <Col>
-                <h2>Cart Items</h2>
-                <h6>{totalItems} items in total</h6>
+                <h5>{totalItems} items in total</h5>
               </Col>
             )}
-            {!cartEmpty && <h3>Cart is empty!</h3>}
           </Row>
 
           {cartEmpty && (
@@ -83,30 +98,44 @@ function OffCanvasExample({ name, ...props }) {
               ))}
             </Row>
           )}
-
           {cartEmpty && (
             <Row>
-              <Col className={classes.actions}>
-                <Link href="/cart" className={classes.link}>
-                  <Button className={classes.order} variant="outline-primary">
-                    View Cart
-                  </Button>
+              <Row>
+                <Col xs={8}>
+                  <div className={classes.actionsTotal}>
+                    <h6>Subtotal</h6>
+                  </div>
+                </Col>
+                <Col xs={4}>
+                  <div className={classes.actionsTotal}>
+                    <h6>
+                      <span style={{ color: "red" }}>
+                        {Number(totalAllPrices).toFixed(2)}
+                      </span>
+                      <span style={{ fontSize: "1rem" }}> JD</span>
+                    </h6>
+                  </div>
+                </Col>
+              </Row>
+
+              <Row className={classes.buttons}>
+                <Link href="/checkout">
+                  <div className="d-grid gap-2 mt-2">
+                    <Button variant="primary">
+                      Checkout
+                    </Button>
+                  </div>
                 </Link>
-                <Link href="/checkout" className={classes.link}>
-                  <Button className={classes.order} variant="primary">
-                    Checkout
-                  </Button>
+              </Row>
+              <Row >
+                <Link href="/cart">
+                  <div className="d-grid gap-2 mt-2">
+                    <Button variant="outline-primary">
+                      View Cart
+                    </Button>
+                  </div>
                 </Link>
-                <div className={classes.actionsTotal}>
-                  <h3>
-                    Subtotal{" "}
-                    <span style={{ fontSize: "1.75rem", color: "red" }}>
-                      {Number(totalAllPrices).toFixed(2)}
-                    </span>
-                    <span style={{ fontSize: "1rem" }}> JD</span>
-                  </h3>
-                </div>
-              </Col>
+              </Row>
             </Row>
           )}
         </Offcanvas.Body>
@@ -128,10 +157,19 @@ function CollapsibleExample(props) {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Link href="/" className={classes.link}>Home</Link>
-            {session && <Link href="/new-product" className={classes.link}>Add a Product</Link>}
-            <Link href="/contact" className={classes.link}>Contact Us</Link>
+            <Link href="/" className={classes.link}>
+              Home
+            </Link>
+            {session && (
+              <Link href="/new-product" className={classes.link}>
+                Add a Product
+              </Link>
+            )}
+            <Link href="/contact" className={classes.link}>
+              Contact Us
+            </Link>
           </Nav>
+
           <Link href="/" className={classes.link}>
             {session && (
               <span style={{ marginRight: 5 }}>
@@ -148,7 +186,11 @@ function CollapsibleExample(props) {
             )}
           </Link>
           <Nav>
-            {!session && <Link href="/" onClick={() => signIn()} className={classes.link}>Login</Link>}
+            {!session && (
+              <Link href="/" onClick={() => signIn()} className={classes.link}>
+                Login
+              </Link>
+            )}
             {session && (
               <Link href="/" onClick={() => signOut()} className={classes.link}>
                 Logout
