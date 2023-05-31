@@ -39,7 +39,7 @@ const HeaderCartButton = (props) => {
   return (
     <div
       className={btnClasses}
-      style={{ cursor: "pointer" }}
+      style={{ cursor: "pointer" , marginTop:3 }}
       onClick={props.onClick}
     >
       <BsCart3 size={25} color="#757686"/>

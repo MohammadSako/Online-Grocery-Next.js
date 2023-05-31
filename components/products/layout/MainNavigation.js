@@ -121,13 +121,13 @@ function OffCanvasExample({ name, ...props }) {
               <Row className={classes.buttons}>
                 <Link href="/checkout">
                   <div className="d-grid gap-2 mt-2">
-                    <Button variant="primary">
+                    <Button variant="outline-primary">
                       Checkout
                     </Button>
                   </div>
                 </Link>
               </Row>
-              <Row >
+              <Row className={classes.buttons}>
                 <Link href="/cart">
                   <div className="d-grid gap-2 mt-2">
                     <Button variant="outline-primary">

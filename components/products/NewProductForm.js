@@ -1,8 +1,9 @@
 import { useRef } from "react";
-import { Button, Col, Container, Form } from "react-bootstrap";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import InputGroup from "react-bootstrap/InputGroup";
 import useInput from "./layout/use-input";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 const NewProductForm = (props) => {
   const router = useRouter();
@@ -87,7 +88,7 @@ const NewProductForm = (props) => {
     resetImageInput;
     resetDescriptionInput;
 
-    router.push('/'); //to go back to the list page
+    router.push("/"); //to go back to the list page
   };
 
   //Css
@@ -179,11 +180,18 @@ const NewProductForm = (props) => {
             )}
           </Form.Group>
         </Col>
-        <Col>
-          <Button disabled={!formIsValid} variant="primary" type="submit">
-            Submit
-          </Button>
-        </Col>
+        <Row xs={4} sm={6} md={6} lg={6}>
+          <Col>
+            <Button disabled={!formIsValid} variant="primary" type="submit">
+              Submit
+            </Button>
+          </Col>
+          <Col>
+            <Link href="/">
+              <Button variant="danger">Cancel</Button>
+            </Link>
+          </Col>
+        </Row>
       </Form>
     </Container>
   );

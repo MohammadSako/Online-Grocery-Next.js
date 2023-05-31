@@ -24,6 +24,7 @@ const Products = (props) => {
         image,
       })
     );
+    router.push("/");
   };
 
   function showDetailHandler() {

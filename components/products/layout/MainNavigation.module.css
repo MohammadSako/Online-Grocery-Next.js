@@ -26,10 +26,11 @@
   padding: 0.5rem 2rem;
   margin: 5px;
 }
-.actions button {
-  border-radius: 22px;
-  text-align: "end";
-  margin: 20px 9px 10px 0;
+.buttons {
+  margin: 10px 0px 0px 0;
+}
+.buttons a {
+  text-decoration: none;
 }
 
 .link {
