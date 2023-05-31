@@ -38,12 +38,7 @@ function OffCanvasExample({ name, ...props }) {
     }
 
     //session //https://github.com/maticzav/nookies
-    const cookies = parseCookies();
-    console.log({ cookies });
-    setCookie(null, "fromClient", cartItems, {
-      maxAge: 30 * 24 * 60 * 60,
-      path: "/",
-    });
+    
   }, [cartQuantity, cartItems]);
 
   //SubTotal
