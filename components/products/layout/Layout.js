@@ -1,7 +1,9 @@
 import { Col, Container, Row } from "react-bootstrap";
 import Footer from "./Footer";
 import MainNavigation from "./MainNavigation";
-import { useSession } from "next-auth/react";
+import { useSession, signIn } from "next-auth/react";
+import Link from "next/link";
+import classes from "./MainNavigation.module.css";
 
 function Layout(props) {
   const { data: session } = useSession();
@@ -10,7 +12,7 @@ function Layout(props) {
     <Container>
       <Row>
         {!session && (
-          <p
+          <Link href="/" onClick={() => signIn()} className={classes.link}><p
             style={{
               background:
                 "radial-gradient(circle, rgba(0,212,255,1) 0%, rgba(0,212,255,1) 1%, rgba(255,255,255,1) 73%)",
@@ -22,7 +24,7 @@ function Layout(props) {
             }}
           >
             Login to get the Admin Privileges
-          </p>
+          </p></Link>
         )}
       </Row>
 

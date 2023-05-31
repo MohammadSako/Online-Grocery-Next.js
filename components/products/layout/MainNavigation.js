@@ -153,7 +153,7 @@ function CollapsibleExample(props) {
   return (
     <Navbar collapseOnSelect expand="md" bg="white" variant="light">
       <Container>
-        <Navbar.Brand href="">Next Shop</Navbar.Brand>
+      <Link href="/" className={classes.link}><Navbar.Brand href="">Next Js Shop</Navbar.Brand></Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
