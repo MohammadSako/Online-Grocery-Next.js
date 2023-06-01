@@ -11,7 +11,8 @@ import { useDispatch, useSelector } from "react-redux";
 import CartItem from "../../Cart/CartItem";
 import { cartActions } from "../../../store/cart-slice";
 import Link from "next/link";
-import { parseCookies, setCookie, destroyCookie } from "nookies";
+import { redirect } from "react-router-dom";
+// import { parseCookies, setCookie, destroyCookie } from "nookies";
 
 const options = [
   {
@@ -145,6 +146,11 @@ function CollapsibleExample(props) {
   const handleShow = () => setShow(true);
   const { data: session } = useSession();
 
+  const signOutHandler = () => {
+    signOut()
+    return redirect("http://localhost:3000/");
+  }
+  
   return (
     <Navbar collapseOnSelect expand="md" bg="white" variant="light">
       <Container>
@@ -186,8 +192,11 @@ function CollapsibleExample(props) {
                 Login
               </Link>
             )}
+
+              {/* <Link href="/" onClick={() => signOut()} className={classes.link}> */}
+          
             {session && (
-              <Link href="/" onClick={() => signOut()} className={classes.link}>
+              <Link href="/" onClick={signOutHandler} className={classes.link}>
                 Logout
               </Link>
             )}

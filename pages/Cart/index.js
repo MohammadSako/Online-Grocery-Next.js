@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect,useState } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { cartActions } from "../../store/cart-slice";
 import CartItem from "../../components/Cart/CartItem";
 import OrderSummary from "../../components/Cart/OrderSummary";
@@ -28,7 +28,7 @@ const CartPage = (props) => {
     <Container className={Classes.container}>
       {cartEmpty && <h1 style={{ margin: "30px 0 30px 0" }}>Cart is Empty!</h1>}
       {cartEmpty && (
-        <Link to="/products">
+        <Link href="/">
           <Button
             style={{ marginBottom: 30 }}
             className={Classes.checkoutBtn}

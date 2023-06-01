@@ -77,7 +77,6 @@ const ProductDetail = (props) => {
                       <Button
                         className={Classes.buttomB}
                         variant="white"
-                        onClick={addToCartHandler}
                       >
                         Back
                       </Button>{" "}
