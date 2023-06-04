@@ -83,12 +83,14 @@ const NewProductForm = (props) => {
     };
     props.onAddProduct(productData);
 
+    // console.log(productData);
+
     resetNameInput;
     resetPriceInput;
     resetImageInput;
     resetDescriptionInput;
 
-    router.push("/"); //to go back to the list page
+    // router.push("/"); //to go back to the list page
   };
 
   //Css

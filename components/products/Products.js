@@ -9,11 +9,10 @@ import { useSession } from "next-auth/react";
 
 const Products = (props) => {
   const router = useRouter();
+  const dispatch = useDispatch();
   const { data: session } = useSession();
-
   const { title, price, description, id, image } = props;
 
-  const dispatch = useDispatch();
   const addToCartHandler = (e) => {
     dispatch(
       cartActions.addItemToCart({
@@ -30,22 +29,19 @@ const Products = (props) => {
     router.push("/" + props.id);
   }
 
-  const deleteProduct = async (e) => {
-    // const dataId = router.query.productId;
+  async function deleteProductHandler(e) {
     console.log(e);
-
     const response = await fetch("/api/new-product", {
       method: "DELETE",
-      body: JSON.stringify(e),
+      body: e,
+      // body: JSON.stringify(e),
       headers: {
         "Content-Type": "application/json",
       },
     });
-    const data = await response.json();
-    console.log(data);
-
-    router.push("/");
-  };
+    // const data = await response.json();
+    router.push("/"); //to go back to the list page
+  }
   return (
     <Col style={{ marginTop: 30 }}>
       <Card className={Classes.col}>
@@ -82,7 +78,8 @@ const Products = (props) => {
               <Button
                 className={Classes.buttomD}
                 variant="white"
-                onClick={deleteProduct}
+                // onClick={deleteProductHandler}
+                onClick={() => deleteProductHandler(id)}
               >
                 Delete
               </Button>

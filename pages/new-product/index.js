@@ -15,11 +15,9 @@ function NewProductPage() {
       },
     });
     const data = await response.json();
+    router.push("/"); //to go back to the list page
+  }
 
-
-    router.push('/'); //to go back to the list page
-  };
-  
   return (
     <Fragment>
       <Head>
@@ -29,6 +27,6 @@ function NewProductPage() {
       <NewProductForm onAddProduct={addProductHandler} />
     </Fragment>
   );
-};
+}
 
 export default NewProductPage;

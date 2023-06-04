@@ -5,10 +5,10 @@
 
 .image {
   padding: 10;
-  height: 250;
-  width: 250;
-  max-height: 250;
-  min-height: 250;
+  height: 250px;
+  width: 250px;
+  max-height: 250px;
+  min-height: 250px;
   cursor: pointer;
 }
 
