@@ -2,15 +2,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect,useState } from "react";
 import Link from "next/link";
 import { cartActions } from "../../store/cart-slice";
-import CartItem from "../../components/Cart/CartItem";
-import OrderSummary from "../../components/Cart/OrderSummary";
+import CartItem from "../../components/CartComponents/CartItem";
+import OrderSummary from "../../components/CartComponents/OrderSummary";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Classes from "./index.module.css";
 import { Button } from "react-bootstrap";
 
-const CartPage = (props) => {
+const Cart = (props) => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
   const totalItems = useSelector((state) => state.cart.totalQuantity);
@@ -26,7 +26,7 @@ const CartPage = (props) => {
 
   return (
     <Container className={Classes.container}>
-      {cartEmpty && <h1 style={{ margin: "30px 0 30px 0" }}>Cart is Empty!</h1>}
+      {cartEmpty && <h1 style={{ margin: "30px 0 30px 0" }}>Cart is Empty!!</h1>}
       {cartEmpty && (
         <Link href="/">
           <Button
@@ -41,7 +41,7 @@ const CartPage = (props) => {
 
       {!cartEmpty && (
         <div>
-          <h2 className={Classes.checkout}>Checkout</h2>
+          <h1 className={Classes.checkout}>Cart</h1>
           <p>{totalItems} Items in Total</p>
         </div>
       )}
@@ -72,4 +72,4 @@ const CartPage = (props) => {
   );
 };
 
-export default CartPage;
+export default Cart;

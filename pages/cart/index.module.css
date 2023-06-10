@@ -79,3 +79,11 @@
   font-weight: 400;
   position: relative;
 }
+
+.image {
+  height: 5.75rem;
+  max-height: 5.75rem;
+  max-width: 5.75rem;
+  width: 5.75rem;
+}
+
