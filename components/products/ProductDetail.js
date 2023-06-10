@@ -6,20 +6,12 @@ import { useSession } from "next-auth/react";
 import { signIn } from "next-auth/react";
 import { cartActions } from "../../store/cart-slice";
 import { useDispatch } from "react-redux";
-import { useRouter } from "next/router";
 import Classes from "./Products.module.css";
 import React, { useCallback } from "react";
 
 const ProductDetail = (props) => {
   const { data: session } = useSession();
   const { title, price, description, id, image } = props;
-  const router = useRouter();
-
-  // const removeProduct = () => {
-  //   const e = props;
-  //   // console.log(e);
-  //   props.onRemoveProduct(e);
-  // };
 
   const dispatch = useDispatch();
   const addToCartHandler = useCallback((e) => {
@@ -97,18 +89,6 @@ const ProductDetail = (props) => {
           </i>
         </p>
       )}
-
-      {/* {session && (
-        <Row>
-          <Col>
-            <Link href="/">
-              <Button variant="danger" onClick={removeProduct}>
-                Delete Product
-              </Button>
-            </Link>
-          </Col>
-        </Row>
-      )} */}
     </Container>
   );
 };

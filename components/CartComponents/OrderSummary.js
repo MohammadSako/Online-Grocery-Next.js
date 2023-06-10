@@ -71,7 +71,7 @@ const OrderSummary = (props) => {
       </Row>
       <Link href="/">
         <Button className={Classes.button} variant="outline-primary">
-          Back
+          Back to the Shop
         </Button>
       </Link>
     </div>

@@ -46,7 +46,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context) {
-  //fectch data for a single product
+  //fetch data for a single product
   const productId = context.params.productId;
   //To connect to the server =>
   const client = await MongoClient.connect(
