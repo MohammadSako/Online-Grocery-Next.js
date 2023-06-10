@@ -38,6 +38,12 @@ const ContactUs = () => {
             Macca - KSA
           </Accordion.Body>
         </Accordion.Item>
+        <Accordion.Item eventKey="2">
+          <Accordion.Header>Macca</Accordion.Header>
+          <Accordion.Body>
+            Al-Madenah - KSA
+          </Accordion.Body>
+        </Accordion.Item>
       </Accordion>
     </Container>
   );
