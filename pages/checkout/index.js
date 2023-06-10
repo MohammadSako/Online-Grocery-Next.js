@@ -143,7 +143,7 @@ const Checkout = () => {
             className={Classes.checkoutBtn}
             variant="primary"
           >
-            Back to the Cart
+            Go to the Cart
           </Button>
         </Link>
       )}
