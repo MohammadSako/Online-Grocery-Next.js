@@ -5,7 +5,7 @@ import { redirect } from "react-router-dom";
 import Link from "next/link";
 import HeaderCartButton from "./HeaderCartButton";
 import classes from "./MainNavigation.module.css";
-import CartItem from "../../Cart/CartItem";
+import CartItem from "../../CartComponents/CartItem";
 import { cartActions } from "../../../store/cart-slice";
 
 import { Button, Row, Col } from "react-bootstrap";
