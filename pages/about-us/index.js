@@ -1,7 +1,7 @@
-// import { Container } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 
-// const AboutUs = () => {
-//   return <Container style={{ marginTop: 20 }}></Container>;
-// };
+const AboutUs = () => {
+  return <Container style={{ marginTop: 20 }}></Container>;
+};
 
-// export default AboutUs;
+export default AboutUs;
