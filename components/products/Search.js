@@ -37,7 +37,7 @@ const Search = (props) => {
           title: data[key].title,
           amount: data[key].amount,
         });
-      }
+      } 
       onLoadIngredients(loadedIngredients);
     }
   }, [data, isLoading, error, onLoadIngredients]);
