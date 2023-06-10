@@ -63,7 +63,7 @@ const Products = (props) => {
         />
         <Card.Body>
           <Card.Title>{title}</Card.Title>
-          <Card.Title>{Number(price).toFixed(2)} JD</Card.Title>
+          <Card.Title>{Number(price).toFixed(2)} JD <span style={{color: "red", fontSize:15}}>per/1kg</span></Card.Title>
           <Card.Text>{description} </Card.Text>
           <div className="d-grid gap-2 mt-2">
             <Button
