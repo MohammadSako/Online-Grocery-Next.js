@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import React, { useRef } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import InputGroup from "react-bootstrap/InputGroup";
 import useInput from "./layout/use-input";
@@ -11,7 +11,6 @@ const NewProductForm = (props) => {
   const imageInputRef = useRef();
   const priceInputRef = useRef();
   const descriptionInputRef = useRef();
-
   //Title
   const {
     value: enteredName,
@@ -199,4 +198,4 @@ const NewProductForm = (props) => {
   );
 };
 
-export default NewProductForm;
+export default React.memo(NewProductForm);

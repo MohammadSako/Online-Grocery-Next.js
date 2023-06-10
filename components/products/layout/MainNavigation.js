@@ -1,18 +1,19 @@
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
+import React, { useCallback, useEffect, useState } from "react";
 import { useSession, signOut, signIn } from "next-auth/react";
-import HeaderCartButton from "./HeaderCartButton";
-import React, { useEffect, useState } from "react";
-import Offcanvas from "react-bootstrap/Offcanvas";
-import { Button, Row, Col } from "react-bootstrap";
-import classes from "./MainNavigation.module.css";
 import { useDispatch, useSelector } from "react-redux";
+import { redirect } from "react-router-dom";
+import Link from "next/link";
+import HeaderCartButton from "./HeaderCartButton";
+import classes from "./MainNavigation.module.css";
 import CartItem from "../../Cart/CartItem";
 import { cartActions } from "../../../store/cart-slice";
-import Link from "next/link";
-import { redirect } from "react-router-dom";
-// import { parseCookies, setCookie, destroyCookie } from "nookies";
+
+import { Button, Row, Col } from "react-bootstrap";
+import Container from "react-bootstrap/Container";
+import Offcanvas from "react-bootstrap/Offcanvas";
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
+
 
 const options = [
   {
@@ -31,15 +32,14 @@ function OffCanvasExample({ name, ...props }) {
   const totalAllPrices = useSelector((state) => state.cart.totalAllPrice);
   const [cartEmpty, setCartEmpty] = useState(false);
 
+  const sideMenuButtonHandler = () => {};
+
   useEffect(() => {
     if (cartQuantity > 0) {
       setCartEmpty(true);
     } else {
       setCartEmpty(false);
     }
-
-    //session //https://github.com/maticzav/nookies
-    
   }, [cartQuantity, cartItems]);
 
   //SubTotal
@@ -113,22 +113,22 @@ function OffCanvasExample({ name, ...props }) {
                   </div>
                 </Col>
               </Row>
-
               <Row className={classes.buttons}>
                 <Link href="/checkout">
                   <div className="d-grid gap-2 mt-2">
-                    <Button variant="outline-primary">
+                    <Button
+                      variant="outline-primary"
+                      onClick={sideMenuButtonHandler}
+                    >
                       Checkout
                     </Button>
                   </div>
                 </Link>
               </Row>
               <Row className={classes.buttons}>
-                <Link href="/cart">
+                <Link href="/cart" closeButton>
                   <div className="d-grid gap-2 mt-2">
-                    <Button variant="outline-primary">
-                      View Cart
-                    </Button>
+                    <Button variant="outline-primary">View Cart</Button>
                   </div>
                 </Link>
               </Row>
@@ -146,15 +146,28 @@ function CollapsibleExample(props) {
   const handleShow = () => setShow(true);
   const { data: session } = useSession();
 
-  const signOutHandler = () => {
-    signOut()
-    return redirect("http://localhost:3000/");
-  }
-  
+  const signOutHandler = useCallback(() => {
+    signOut();
+    // return redirect("http://localhost:3000/");
+    return redirect("/");
+  }, []);
+
+  const filteredHandler = useCallback((event) => {
+    setUserIngredients(event);
+  }, []);
+
   return (
-    <Navbar collapseOnSelect expand="md" bg="white" variant="light">
+    <Navbar
+      collapseOnSelect
+      expand="md"
+      className="mb-3"
+      bg="white"
+      variant="light"
+    >
       <Container>
-      <Link href="/" className={classes.link}><Navbar.Brand href="">Next Js Shop</Navbar.Brand></Link>
+        <Link href="/" className={classes.link}>
+          <Navbar.Brand href="">Next Js Shop</Navbar.Brand>
+        </Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
@@ -193,15 +206,28 @@ function CollapsibleExample(props) {
               </Link>
             )}
 
-              {/* <Link href="/" onClick={() => signOut()} className={classes.link}> */}
-          
+            {/* <Link href="/" onClick={() => signOut()} className={classes.link}> */}
+
             {session && (
               <Link href="/" onClick={signOutHandler} className={classes.link}>
                 Logout
               </Link>
             )}
           </Nav>
+          {/* <Form className="d-flex">
+            <Form.Control
+              placeholder="Search"
+              className="me-2"
+              aria-label="Search"
 
+              ref={inputRef}
+              type="text"
+              value={enteredFilter}
+              onChange={searchHandeler}
+            />
+
+            <Button variant="outline-success">Search</Button>
+          </Form> */}
           <Nav>
             {options.map((props, idx) => (
               <OffCanvasExample key={idx} {...props} />
@@ -213,4 +239,4 @@ function CollapsibleExample(props) {
   );
 }
 
-export default CollapsibleExample;
+export default React.memo(CollapsibleExample);

@@ -9,6 +9,7 @@ import {
   AiFillFacebook,
 } from "react-icons/ai";
 import Link from "next/link";
+import React from "react";
 
 const Footer = () => {
   return (
@@ -102,4 +103,4 @@ const Footer = () => {
     </div>
   );
 };
-export default Footer;
+export default React.memo(Footer);

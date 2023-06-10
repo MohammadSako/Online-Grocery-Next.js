@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import classes from "./HeaderCartButton.module.css";
 import Badge from "react-bootstrap/Badge";
@@ -6,7 +6,6 @@ import { BsCart3 } from "react-icons/bs";
 
 const HeaderCartButton = (props) => {
   const cartQuantity = useSelector((state) => state.cart.totalQuantity);
-
   const [cartEmpty, setCartEmpty] = useState(false);
 
   useEffect(() => {
@@ -59,4 +58,4 @@ const HeaderCartButton = (props) => {
     </div>
   );
 };
-export default HeaderCartButton;
+export default React.memo(HeaderCartButton);

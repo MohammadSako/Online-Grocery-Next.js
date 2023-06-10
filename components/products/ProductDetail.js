@@ -8,6 +8,7 @@ import { cartActions } from "../../store/cart-slice";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import Classes from "./Products.module.css";
+import React, { useCallback } from "react";
 
 const ProductDetail = (props) => {
   const { data: session } = useSession();
@@ -21,7 +22,7 @@ const ProductDetail = (props) => {
   // };
 
   const dispatch = useDispatch();
-  const addToCartHandler = (e) => {
+  const addToCartHandler = useCallback((e) => {
     dispatch(
       cartActions.addItemToCart({
         id,
@@ -31,7 +32,7 @@ const ProductDetail = (props) => {
         image,
       })
     );
-  };
+  }, [dispatch, id, title, price, description, image]);
 
   return (
     <Container>
@@ -111,4 +112,4 @@ const ProductDetail = (props) => {
     </Container>
   );
 };
-export default ProductDetail;
+export default React.memo(ProductDetail);

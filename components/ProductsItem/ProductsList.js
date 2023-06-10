@@ -1,5 +1,6 @@
 import { Container, Row } from "react-bootstrap";
 import Products from "../products/Products";
+import React from "react";
 
 const ProductsList = (props) => {
   return (
@@ -22,4 +23,4 @@ const ProductsList = (props) => {
   );
 };
 
-export default ProductsList;
+export default React.memo(ProductsList);

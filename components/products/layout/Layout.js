@@ -1,4 +1,4 @@
-import { Col, Container, Row } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 import Footer from "./Footer";
 import MainNavigation from "./MainNavigation";
 import { useSession, signIn } from "next-auth/react";
