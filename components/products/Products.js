@@ -63,8 +63,13 @@ const Products = (props) => {
         />
         <Card.Body>
           <Card.Title>{title}</Card.Title>
-          <Card.Title>{Number(price).toFixed(2)} JD <span style={{color: "red", fontSize:15}}>per/1kg</span></Card.Title>
-          <Card.Text><i>{description}</i> </Card.Text>
+          <Card.Title>
+            {Number(price).toFixed(2)} JD{" "}
+            <span style={{ color: "red", fontSize: 15 }}>per/1kg</span>
+          </Card.Title>
+          <Card.Text>
+            <i>{description}</i>{" "}
+          </Card.Text>
           <div className="d-grid gap-2 mt-2">
             <Button
               className={Classes.buttom}
@@ -83,18 +88,18 @@ const Products = (props) => {
               Show Details
             </Button>
           </div>
-          {session && (
-            <div className="d-grid gap-2 mt-2">
-              <Button
-                className={Classes.buttomD}
-                variant="white"
-                // onClick={deleteProductHandler}
-                onClick={() => deleteProductHandler(id)}
-              >
-                Delete
-              </Button>
-            </div>
-          )}
+
+          <div className="d-grid gap-2 mt-2">
+            <Button
+              className={!session ? Classes.disabledButtomD : Classes.buttomD}
+              variant="white"
+              // onClick={deleteProductHandler}
+              onClick={() => deleteProductHandler(id)}
+            >
+              {!session && "Login to Delete"}
+              {session && "Delete"}
+            </Button>
+          </div>
         </Card.Body>
       </Card>
     </Col>

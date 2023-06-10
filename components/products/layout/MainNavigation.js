@@ -14,7 +14,6 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 
-
 const options = [
   {
     name: "Enable both scrolling & backdrop",
@@ -174,13 +173,16 @@ function CollapsibleExample(props) {
             <Link href="/" className={classes.link}>
               Home
             </Link>
-            {session && (
-              <Link href="/new-product" className={classes.link}>
-                Add a Product
-              </Link>
-            )}
             <Link href="/contact" className={classes.link}>
               Contact Us
+            </Link>
+
+            <Link
+              href="/new-product"
+              className={!session ? classes.disabled : classes.link}
+            >
+              {!session && "Login to Add Products"}
+              {session && "Add a Product"}
             </Link>
           </Nav>
 

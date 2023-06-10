@@ -41,12 +41,22 @@
   color: #f32020;
   font-weight: bold;
   margin-top: 10px;
+  position: relative;
 }
 .buttomD:hover {
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 0px 0px 0 rgba(0, 0, 0, 0.19);
   color: #f18888;
   font-weight: bold;
 }
+.disabledButtomD {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19);
+  color: #b6b4b4;
+  font-weight: bold;
+  margin-top: 10px;
+  pointer-events: none;
+  position: relative;
+}
+
 .buttomB {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19);
   color: #2a69dd;
