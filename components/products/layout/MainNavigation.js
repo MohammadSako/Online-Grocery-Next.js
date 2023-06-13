@@ -31,8 +31,6 @@ function OffCanvasExample({ name, ...props }) {
   const totalAllPrices = useSelector((state) => state.cart.totalAllPrice);
   const [cartEmpty, setCartEmpty] = useState(false);
 
-  const sideMenuButtonHandler = () => {};
-
   useEffect(() => {
     if (cartQuantity > 0) {
       setCartEmpty(true);
@@ -115,12 +113,7 @@ function OffCanvasExample({ name, ...props }) {
               <Row className={classes.buttons}>
                 <Link href="/checkout">
                   <div className="d-grid gap-2 mt-2">
-                    <Button
-                      variant="outline-primary"
-                      onClick={sideMenuButtonHandler}
-                    >
-                      Checkout
-                    </Button>
+                    <Button variant="outline-primary">Checkout</Button>
                   </div>
                 </Link>
               </Row>

@@ -6,6 +6,7 @@ const cartSlice = createSlice({
     items: [],
     totalQuantity: 0,
     totalAllPrice: 0,
+    shippingFee: 5,
   },
   reducers: {
     addItemToCart(state, action) {
@@ -23,7 +24,8 @@ const cartSlice = createSlice({
         });
       } else {
         existingItem.quantity++;
-        existingItem.totalPrice = existingItem.totalPrice + newItem.price;
+        // existingItem.totalPrice += newItem.price;
+        existingItem.totalPrice = existingItem.price * existingItem.quantity;
       }
     },
 

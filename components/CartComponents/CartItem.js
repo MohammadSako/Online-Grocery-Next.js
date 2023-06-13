@@ -31,44 +31,42 @@ const CartItem = (props) => {
 
   return (
     <>
-      
-        <Row className={Classes.row}>
-          <Col>
-            <Card.Body>
-              <Card.Img className={Classes.image} variant="top" src={image} />
-            </Card.Body>
-          </Col>
-          <Col>
-            <Card.Title>
-              <span style={{ color: "Red" }}>{name}</span>{" "}
-            </Card.Title>
-            <Card.Text className="mb-2 text-muted">
-              {quantity} X{" "}
+      <Row className={Classes.row}>
+        <Col>
+          <Card.Body>
+            <Card.Img className={Classes.image} variant="top" src={image} />
+          </Card.Body>
+        </Col>
+        <Col>
+          <Card.Title>
+            <span style={{ color: "Red" }}>{name}</span>{" "}
+          </Card.Title>
+          <Card.Text className="mb-2 text-muted">
+            {quantity} X{" "}
+            <span style={{ color: "Red" }}>
+              ({Number(price).toFixed(2)} JD /item)
+            </span>
+          </Card.Text>
+          <Card.Subtitle className="mb-2 text-muted">
+            <h5 className="text-muted">
+              Total:{" "}
               <span style={{ color: "Red" }}>
-                ({Number(price).toFixed(2)} JD /item)
-              </span>
-            </Card.Text>
-            <Card.Subtitle className="mb-2 text-muted">
-              <h5 className="text-muted">
-                Total:{" "}
-                <span style={{ color: "Red" }}>
-                  {Number(price * quantity).toFixed(2)}
-                </span>{" "}
-                JD
-              </h5>
-            </Card.Subtitle>
-            <ButtonGroup className="me-2">
-              <Button variant="outline-primary" onClick={removeItem}>
-                <span style={{ fontWeight: "bold" }}>-</span>
-              </Button>{" "}
-              <Button variant="outline-primary" onClick={addItem}>
-                <span style={{ fontWeight: "bold" }}>+</span>
-              </Button>{" "}
-            </ButtonGroup>
-          </Col>
-        </Row>
-        <div className={Classes.line}>
-      </div>
+                {Number(price * quantity).toFixed(2)}
+              </span>{" "}
+              JD
+            </h5>
+          </Card.Subtitle>
+          <ButtonGroup className="me-2">
+            <Button variant="outline-primary" onClick={removeItem}>
+              <span style={{ fontWeight: "bold" }}>-</span>
+            </Button>{" "}
+            <Button variant="outline-primary" onClick={addItem}>
+              <span style={{ fontWeight: "bold" }}>+</span>
+            </Button>{" "}
+          </ButtonGroup>
+        </Col>
+      </Row>
+      <div className={Classes.line}></div>
     </>
   );
 };

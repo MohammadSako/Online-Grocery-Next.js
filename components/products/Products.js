@@ -1,5 +1,5 @@
-import { useCallback } from "react";
-import { useDispatch } from "react-redux";
+import { useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import { cartActions } from "../../store/cart-slice";
@@ -11,8 +11,19 @@ import Card from "react-bootstrap/Card";
 const Products = (props) => {
   const router = useRouter();
   const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart.items);
   const { data: session } = useSession();
   const { title, price, description, id, image } = props;
+ 
+// useEffect(() => {
+  
+//     let LocalCartItems = localStorage.getItem("cart");
+//     if (LocalCartItems === []) {
+//       return [];
+//     } else {
+//       return JSON.parse(LocalCartItems);
+//     }
+// }, [])
 
   const addToCartHandler = useCallback(
     (e) => {
