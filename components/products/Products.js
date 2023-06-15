@@ -14,19 +14,9 @@ const Products = (props) => {
   const cartItems = useSelector((state) => state.cart.items);
   const { data: session } = useSession();
   const { title, price, description, id, image } = props;
- 
-// useEffect(() => {
-  
-//     let LocalCartItems = localStorage.getItem("cart");
-//     if (LocalCartItems === []) {
-//       return [];
-//     } else {
-//       return JSON.parse(LocalCartItems);
-//     }
-// }, [])
 
   const addToCartHandler = useCallback(
-    (e) => {
+    () => {
       dispatch(
         cartActions.addItemToCart({
           id,
@@ -52,13 +42,12 @@ const Products = (props) => {
       const response = await fetch("/api/new-product", {
         method: "DELETE",
         body: e,
-        // body: JSON.stringify(e),
         headers: {
           "Content-Type": "application/json",
         },
       });
       // const data = await response.json();
-      router.push("/"); //to go back to the list page
+      router.push("/");
     },
     [router]
   );

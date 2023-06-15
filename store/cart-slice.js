@@ -1,4 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { parseCookies, setCookie } from "nookies";
+
+
+// const cookies = parseCookies("cartItems");
 
 const cartSlice = createSlice({
   name: "cart",
@@ -27,6 +31,10 @@ const cartSlice = createSlice({
         // existingItem.totalPrice += newItem.price;
         existingItem.totalPrice = existingItem.price * existingItem.quantity;
       }
+      setCookie(null, 'cartItems', state.items, {
+        maxAge: 86400, // Cookie expiration time in seconds
+        path: '/', // Cookie path
+      });
     },
 
     removeItemFromCart(state, action) {

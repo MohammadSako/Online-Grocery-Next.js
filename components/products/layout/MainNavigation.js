@@ -13,6 +13,7 @@ import Container from "react-bootstrap/Container";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
+// import { setCookie } from "nookies";
 
 const options = [
   {
@@ -31,9 +32,15 @@ function OffCanvasExample({ name, ...props }) {
   const totalAllPrices = useSelector((state) => state.cart.totalAllPrice);
   const [cartEmpty, setCartEmpty] = useState(false);
 
+
+
   useEffect(() => {
     if (cartQuantity > 0) {
       setCartEmpty(true);
+      // setCookie(null, 'cartItems', cartItems, {
+      //   maxAge: 86400, // Cookie expiration time in seconds
+      //   path: '/', // Cookie path
+      // });
     } else {
       setCartEmpty(false);
     }
