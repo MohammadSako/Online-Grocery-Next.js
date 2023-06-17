@@ -42,7 +42,7 @@ const Products = (props) => {
         path: '/',
       });
     },
-    [dispatch, id, title, price, description, image]
+    [dispatch, id, title, price, description, image, cookies]
   );
 
   function showDetailHandler() {
