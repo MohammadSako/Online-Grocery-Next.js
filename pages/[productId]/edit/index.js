@@ -26,7 +26,7 @@ const ProductsEdit = (props) => {
   return (
     <Fragment>
       <Head>
-        <title>{props.productData.title}</title>
+        <title>Edit {props.productData.title}</title>
         <meta name="description" content={props.productData.description} />
       </Head>
 
@@ -36,7 +36,7 @@ const ProductsEdit = (props) => {
         price={props.productData.price}
         description={props.productData.description}
         id={props.productData.id}
-        onEditProduct={editProductHandler}
+        // onEditProduct={editProductHandler}
       />
     </Fragment>
   );
