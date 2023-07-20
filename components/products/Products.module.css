@@ -20,7 +20,7 @@
 }
 .buttom:hover {
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 0px 0px 0 rgba(0, 0, 0, 0.19);
-  color: #13d101;
+  color: #a4d19f;
   font-weight: bold;
 }
 
@@ -30,9 +30,13 @@
   font-weight: bold;
   margin-top: 10px;
 }
+.backButton {
+  text-decoration: none;
+}
+
 .buttomS:hover {
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 0px 0px 0 rgba(0, 0, 0, 0.19);
-  color: #3b90cd;
+  color: #619dc8;
   font-weight: bold;
 }
 
@@ -57,14 +61,14 @@
   position: relative;
 }
 
-.buttomB {
+.buttomE {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19);
-  color: #2a69dd;
+  color: #0594dc;
   font-weight: bold;
   margin-top: 10px;
 }
-.buttomB:hover {
+.buttomE:hover {
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 0px 0px 0 rgba(0, 0, 0, 0.19);
-  color: #3b90cd;
+  color: #9ac2d6;
   font-weight: bold;
 }

@@ -54,6 +54,7 @@ function OffCanvasExample({ name, ...props }) {
     <>
       <HeaderCartButton onClick={toggleShow} />
       <Offcanvas show={show} onHide={handleClose} {...props}>
+      
         <Offcanvas.Header closeButton>
           {cartEmpty && (
             <Offcanvas.Title>

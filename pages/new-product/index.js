@@ -9,7 +9,6 @@ function NewProductPage() {
 
   const addProductHandler = useCallback(
     async (e) => {
-      // async function addProductHandler(e) {
       const response = await fetch("/api/new-product", {
         method: "POST",
         body: JSON.stringify(e),
@@ -18,7 +17,8 @@ function NewProductPage() {
         },
       });
       const data = await response.json();
-      router.push("/"); //to go back to the list page
+      console.log(data);
+      router.push("/");
     },
     [router]
   );

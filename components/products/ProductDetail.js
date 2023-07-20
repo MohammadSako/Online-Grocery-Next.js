@@ -8,23 +8,32 @@ import { cartActions } from "../../store/cart-slice";
 import { useDispatch } from "react-redux";
 import Classes from "./Products.module.css";
 import React, { useCallback } from "react";
+import { useRouter } from "next/router";
 
 const ProductDetail = (props) => {
+  const router = useRouter();
   const { data: session } = useSession();
   const { title, price, description, id, image } = props;
 
   const dispatch = useDispatch();
-  const addToCartHandler = useCallback((e) => {
-    dispatch(
-      cartActions.addItemToCart({
-        id,
-        title,
-        price,
-        description,
-        image,
-      })
-    );
-  }, [dispatch, id, title, price, description, image]);
+  const addToCartHandler = useCallback(
+    (e) => {
+      dispatch(
+        cartActions.addItemToCart({
+          id,
+          title,
+          price,
+          description,
+          image,
+        })
+      );
+    },
+    [dispatch, id, title, price, description, image]
+  );
+
+  const deleteProductHandler = () => {
+    props.onDeleteProduct(props);
+  };
 
   return (
     <Container>
@@ -65,12 +74,35 @@ const ProductDetail = (props) => {
                       Add to Cart
                     </Button>
                   </div>
-                  <Link href="/">
+                  <Link href="/new-product" className={Classes.backButton}>
                     <div className="d-grid gap-2 mt-2">
                       <Button
-                        className={Classes.buttomB}
+                        className={
+                          !session ? Classes.disabledButtomD : Classes.buttomE
+                        }
                         variant="white"
                       >
+                        {!session && "Login to Edit"}
+                        {session && "Edit"}
+                      </Button>
+                    </div>
+                  </Link>
+
+                  <div className="d-grid gap-2 mt-2">
+                    <Button
+                      className={
+                        !session ? Classes.disabledButtomD : Classes.buttomD
+                      }
+                      variant="white"
+                      onClick={deleteProductHandler}
+                    >
+                      {!session && "Login to Delete"}
+                      {session && "Delete"}
+                    </Button>
+                  </div>
+                  <Link href="/" className={Classes.backButton}>
+                    <div className="d-grid gap-2 mt-2">
+                      <Button className={Classes.buttomS} variant="white">
                         Back
                       </Button>{" "}
                     </div>

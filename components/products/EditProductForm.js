@@ -5,7 +5,7 @@ import useInput from "./layout/use-input";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-const NewProductForm = (props) => {
+const EditProductForm = (props) => {
   const router = useRouter();
   const titleInputRef = useRef();
   const imageInputRef = useRef();
@@ -80,16 +80,14 @@ const NewProductForm = (props) => {
       price: enteredPrice,
       description: enteredDescription,
     };
-    props.onAddProduct(productData);
-
-    // console.log(productData);
+    props.onEditProduct(productData);
 
     resetNameInput;
     resetPriceInput;
     resetImageInput;
     resetDescriptionInput;
 
-    // router.push("/"); //to go back to the list page
+    router.push("/"); //to go back to the list page
   };
 
   //Css
@@ -112,7 +110,7 @@ const NewProductForm = (props) => {
 
   return (
     <Container style={{ marginTop: 25, maxWidth: 600 }}>
-      <h3 style={{ marginBottom: 20 }}>Add a Product</h3>
+      <h3 style={{ marginBottom: 20 }}>Edit Product</h3>
 
       <Form onSubmit={submitHandler}>
         <Col style={{ marginBottom: 15 }} className={nameInputClasses}>
@@ -184,7 +182,7 @@ const NewProductForm = (props) => {
         <Row xs={4} sm={6} md={6} lg={6}>
           <Col>
             <Button disabled={!formIsValid} variant="primary" type="submit">
-              Submit
+              Edit
             </Button>
           </Col>
           <Col>
@@ -198,4 +196,4 @@ const NewProductForm = (props) => {
   );
 };
 
-export default React.memo(NewProductForm);
+export default React.memo(EditProductForm);
