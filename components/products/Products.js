@@ -12,6 +12,7 @@ import getCookies from "../../util/getCookies";
 import Link from "next/link";
 
 const Products = (props) => {
+
   const cookies = getCookies();
   const router = useRouter();
   const dispatch = useDispatch();

@@ -2,26 +2,27 @@
 import { Fragment, useCallback } from "react";
 import Head from "next/head";
 import { MongoClient, ObjectId } from "mongodb";
-// import { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import EditProductForm from "../../../components/products/EditProductForm";
 
 const ProductsEdit = (props) => {
-//   const router = useRouter();
-//   const editProductHandler = useCallback(
-//     async (e) => {
-//       const response = await fetch("/api/delete-product", {
-//         method: "POST",
-//         body: JSON.stringify(e),
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//       });
-//       const data = await response.json();
-//       console.log(data);
-//       router.push("/");
-//     },
-//     [router]
-//   );
+  const router = useRouter();
+
+  const editProductHandler = useCallback(
+    async (e) => {
+      const response = await fetch("/api/update-product", {
+        method: "POST",
+        body: JSON.stringify(e),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      console.log(data);
+      router.push("/");
+    },
+    [router]
+  );
 
   return (
     <Fragment>
@@ -36,7 +37,7 @@ const ProductsEdit = (props) => {
         price={props.productData.price}
         description={props.productData.description}
         id={props.productData.id}
-        // onEditProduct={editProductHandler}
+        onEditProduct={editProductHandler}
       />
     </Fragment>
   );

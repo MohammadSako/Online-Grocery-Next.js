@@ -50,6 +50,9 @@ const useInput = (e) => {
 };
 
 export default useInput;
+
+
+//Old Method
 // import { useState } from "react";
 
 // const useInput = (e) => {
