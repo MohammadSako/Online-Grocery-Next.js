@@ -35,6 +35,10 @@ const ProductDetail = (props) => {
     props.onDeleteProduct(props);
   };
 
+  function editProductHandler() {
+    router.push("/" + props.id + "/edit");
+  }
+  
   return (
     <Container>
       <Card style={{ marginBottom: 10 }}>
@@ -74,20 +78,18 @@ const ProductDetail = (props) => {
                       Add to Cart
                     </Button>
                   </div>
-                  <Link href="/new-product" className={Classes.backButton}>
-                    <div className="d-grid gap-2 mt-2">
-                      <Button
-                        className={
-                          !session ? Classes.disabledButtomD : Classes.buttomE
-                        }
-                        variant="white"
-                      >
-                        {!session && "Login to Edit"}
-                        {session && "Edit"}
-                      </Button>
-                    </div>
-                  </Link>
-
+                  <div className="d-grid gap-2 mt-2">
+                    <Button
+                      onClick={() => editProductHandler(props)}
+                      className={
+                        !session ? Classes.disabledButtomD : Classes.buttomE
+                      }
+                      variant="white"
+                    >
+                      {!session && "Login to Edit"}
+                      {session && "Edit"}
+                    </Button>
+                  </div>
                   <div className="d-grid gap-2 mt-2">
                     <Button
                       className={
