@@ -14,8 +14,9 @@ const ProductDetail = (props) => {
   const router = useRouter();
   const { data: session } = useSession();
   const { title, price, description, id, image } = props;
-
   const dispatch = useDispatch();
+
+  //Add To Cart Function
   const addToCartHandler = useCallback(
     (e) => {
       dispatch(
@@ -31,14 +32,16 @@ const ProductDetail = (props) => {
     [dispatch, id, title, price, description, image]
   );
 
+  //Delete Handler
   const deleteProductHandler = () => {
     props.onDeleteProduct(props);
   };
 
+  //Edit Handler
   function editProductHandler() {
     router.push("/" + props.id + "/edit");
   }
-  
+
   return (
     <Container>
       <Card style={{ marginBottom: 10 }}>

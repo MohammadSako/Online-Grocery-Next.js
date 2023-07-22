@@ -10,6 +10,8 @@ const ProductsEdit = (props) => {
 
   const editProductHandler = useCallback(
     async (e) => {
+      console.log(e);
+
       const response = await fetch("/api/update-product", {
         method: "POST",
         body: JSON.stringify(e),

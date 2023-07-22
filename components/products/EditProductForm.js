@@ -2,12 +2,10 @@ import React, { useRef } from "react";
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 import InputGroup from "react-bootstrap/InputGroup";
 import useInput from "./layout/use-input";
-import { useRouter } from "next/router";
 import Link from "next/link";
 import Classes from "./Products.module.css";
 
 const EditProductForm = (props) => {
-  const router = useRouter();
   const titleInputRef = useRef();
   const imageInputRef = useRef();
   const priceInputRef = useRef();
@@ -80,15 +78,9 @@ const EditProductForm = (props) => {
       image: enteredImage,
       price: enteredPrice,
       description: enteredDescription,
+      id: props.id
     };
     props.onEditProduct(productData);
-
-    resetNameInput;
-    resetPriceInput;
-    resetImageInput;
-    resetDescriptionInput;
-
-    router.push("/"); //to go back to the list page
   };
 
   //Css

@@ -86,8 +86,6 @@ const NewProductForm = (props) => {
     resetPriceInput;
     resetImageInput;
     resetDescriptionInput;
-
-    router.push("/"); //to go back to the list page
   };
 
   //Css
