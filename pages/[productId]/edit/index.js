@@ -58,7 +58,7 @@ export async function getStaticPaths() {
   };
 }
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
   //fetch data for a single product
   const productId = context.params.productId;
   const client = await MongoClient.connect(
