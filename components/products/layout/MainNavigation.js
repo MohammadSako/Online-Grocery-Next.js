@@ -31,8 +31,6 @@ function OffCanvasExample({ name, ...props }) {
   const totalAllPrices = useSelector((state) => state.cart.totalAllPrice);
   const [cartEmpty, setCartEmpty] = useState(false);
 
-
-
   useEffect(() => {
     if (cartQuantity > 0) {
       setCartEmpty(true);
@@ -54,7 +52,6 @@ function OffCanvasExample({ name, ...props }) {
     <>
       <HeaderCartButton onClick={toggleShow} />
       <Offcanvas show={show} onHide={handleClose} {...props}>
-      
         <Offcanvas.Header closeButton>
           {cartEmpty && (
             <Offcanvas.Title>
@@ -114,16 +111,16 @@ function OffCanvasExample({ name, ...props }) {
                 </Col>
               </Row>
               <Row className={classes.buttons}>
-                <Link href="/checkout">
+                <Link href="/cart" closeButton>
                   <div className="d-grid gap-2 mt-2">
-                    <Button variant="outline-primary">Checkout</Button>
+                    <Button variant="outline-primary">View Cart</Button>
                   </div>
                 </Link>
               </Row>
               <Row className={classes.buttons}>
-                <Link href="/cart" closeButton>
+                <Link href="/checkout">
                   <div className="d-grid gap-2 mt-2">
-                    <Button variant="outline-primary">View Cart</Button>
+                    <Button variant="outline-primary">Checkout</Button>
                   </div>
                 </Link>
               </Row>

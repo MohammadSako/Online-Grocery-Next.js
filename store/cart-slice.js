@@ -9,7 +9,6 @@ const cartSlice = createSlice({
     totalQuantity: 0,
     totalAllPrice: 0,
     shippingFee: 5,
-    // itemId: '',
   },
   reducers: {
     addItemToCart(state, action) {

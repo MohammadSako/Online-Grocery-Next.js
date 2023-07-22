@@ -37,19 +37,7 @@ export async function getStaticProps() {
         id: product._id.toString(),
       })),
     },
-    revalidate: 1, //unlock a feature called incremental Static Generation. ISR
+    revalidate: 1,
   };
 }
-
-//SSR Server-Side Rendering
-// export async function getServerSideProps(props) {
-//   const req = context.req;
-//   const res = context.res;
-//   return {
-//     props: {
-//       products: Dummy_items,
-//     },
-//   };
-// }
-
 export default HomePage;
