@@ -7,10 +7,7 @@ import EditProductForm from "../../../components/products/EditProductForm";
 
 const ProductsEdit = (props) => {
   const router = useRouter();
-
   const editProductHandler = async (e) => {
-    console.log(e);
-
     const response = await fetch("/api/update-product", {
       method: "POST",
       body: JSON.stringify(e),
@@ -29,7 +26,6 @@ const ProductsEdit = (props) => {
         <title>Edit {props.productData.title}</title>
         <meta name="description" content={props.productData.description} />
       </Head>
-
       <EditProductForm
         image={props.productData.image}
         title={props.productData.title}
@@ -49,7 +45,6 @@ export async function getStaticPaths() {
   );
   const db = client.db();
   const productsCollection = db.collection("products");
-
   //this will give only IDs
   const products = await productsCollection.find({}, { _id: 1 }).toArray();
   client.close();
@@ -66,21 +61,16 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
   //fetch data for a single product
   const productId = context.params.productId;
-
-  //To connect to the server =>
   const client = await MongoClient.connect(
     "mongodb+srv://sakodatabase:EYmcsgXd4txjPb9L@cluster1.ksjs9y2.mongodb.net/products?retryWrites=true&w=majority"
   );
   const db = client.db();
   const productsCollection = db.collection("products");
-
   const selectedProduct = await productsCollection.findOne({
     _id: new ObjectId(productId),
   });
-  // console.log(selectedProduct); //this will show only in the terminal, in the server side only.
-
+  // console.log(selectedProduct); //this preview it only in the terminal, in the server side only.
   client.close();
-
   return {
     props: {
       productData: {
@@ -93,5 +83,4 @@ export async function getStaticProps(context) {
     },
   };
 }
-
 export default ProductsEdit;
