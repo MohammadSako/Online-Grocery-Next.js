@@ -2,7 +2,6 @@ import { MongoClient, ObjectId } from "mongodb";
 
 async function Handler(req, res) {
   if (req.method === "POST") {
-
     const id = req.body.id;
     const data = {
       title: req.body.title,
@@ -23,7 +22,6 @@ async function Handler(req, res) {
         $set: data,
       }
     );
-    
     console.log(result);
     client.close();
     res.status(201).json({ message: "Successfully Data Updated.." });

@@ -1,18 +1,3 @@
-// import Layout from "../components/products/layout/Layout";
-// import "../styles/globals.css";
-// import "bootstrap/dist/css/bootstrap.min.css";
-
-// export default function App({
-//   Component,
-//   pageProps,
-// }) {
-//   return (
-//       <Layout>
-//         <Component {...pageProps} />
-//       </Layout>
-//   );
-// }
-
 import { Provider } from "react-redux";
 import Layout from "../components/products/layout/Layout";
 import "../styles/globals.css";
@@ -26,14 +11,10 @@ import { useEffect } from "react";
 const App = ({ Component, pageProps: { session, ...pageProps } }) => {
   const cookies = getCookies();
   useEffect(() => {
-    const items = cookies?.['cartItems'] ? JSON.parse(cookies?.['cartItems']) : [];
-    items?.forEach(({
-      id,
-      title,
-      price,
-      description,
-      image,
-    }) => {
+    const items = cookies?.["cartItems"]
+      ? JSON.parse(cookies?.["cartItems"])
+      : [];
+    items?.forEach(({ id, title, price, description, image }) => {
       store.dispatch(
         cartActions.addItemToCart({
           id,
@@ -44,7 +25,7 @@ const App = ({ Component, pageProps: { session, ...pageProps } }) => {
         })
       );
     });
-}, []);
+  }, []);
   return (
     <Provider store={store}>
       <SessionProvider session={session}>
