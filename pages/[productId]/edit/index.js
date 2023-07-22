@@ -8,23 +8,20 @@ import EditProductForm from "../../../components/products/EditProductForm";
 const ProductsEdit = (props) => {
   const router = useRouter();
 
-  const editProductHandler = useCallback(
-    async (e) => {
-      console.log(e);
+  const editProductHandler = async (e) => {
+    console.log(e);
 
-      const response = await fetch("/api/update-product", {
-        method: "POST",
-        body: JSON.stringify(e),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await response.json();
-      console.log(data);
-      router.push("/");
-    },
-    [router]
-  );
+    const response = await fetch("/api/update-product", {
+      method: "POST",
+      body: JSON.stringify(e),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+    console.log(data);
+    router.push("/");
+  };
 
   return (
     <Fragment>
