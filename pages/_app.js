@@ -6,7 +6,8 @@ import { SessionProvider } from "next-auth/react";
 import store from "../store/index";
 import getCookies from "../util/getCookies";
 import { cartActions } from "../store/cart-slice";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
+import Loading from "../components/products/layout/UI/Loading";
 
 const App = ({ Component, pageProps: { session, ...pageProps } }) => {
   const cookies = getCookies();
@@ -30,7 +31,9 @@ const App = ({ Component, pageProps: { session, ...pageProps } }) => {
     <Provider store={store}>
       <SessionProvider session={session}>
         <Layout>
-          <Component {...pageProps} />
+          <Suspense fallback={<Loading />}>
+            <Component {...pageProps} />
+          </Suspense>
         </Layout>
       </SessionProvider>
     </Provider>

@@ -1,12 +1,15 @@
 //our-domain.com/news/news
-import { Fragment, useCallback } from "react";
+import { Fragment, Suspense, useCallback } from "react";
 import Head from "next/head";
 import { MongoClient, ObjectId } from "mongodb";
-import ProductDetail from "../../components/products/ProductDetail";
+// import ProductDetail from "../../components/products/ProductDetail";
 import { useRouter } from "next/router";
+import dynamic from 'next/dynamic'
+const ProductDetail = dynamic(() => import('../../components/products/ProductDetail'))
 
 const ProductDetails = (props) => {
   const router = useRouter();
+  
   const deleteProductHandler = useCallback(
     async (e) => {
       const response = await fetch("/api/delete-product", {
@@ -29,7 +32,6 @@ const ProductDetails = (props) => {
         <title>{props.productData.title}</title>
         <meta name="description" content={props.productData.description} />
       </Head>
-
       <ProductDetail
         image={props.productData.image}
         title={props.productData.title}
@@ -64,23 +66,20 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context) {
+  <h1>Loading.....</h1>
   //fetch data for a single product
   const productId = context.params.productId;
-
   //To connect to the server =>
   const client = await MongoClient.connect(
     "mongodb+srv://sakodatabase:EYmcsgXd4txjPb9L@cluster1.ksjs9y2.mongodb.net/products?retryWrites=true&w=majority"
   );
   const db = client.db();
   const productsCollection = db.collection("products");
-
   const selectedProduct = await productsCollection.findOne({
     _id: new ObjectId(productId),
   });
   // console.log(selectedProduct); //this will show only in the terminal, in the server side only.
-
   client.close();
-
   return {
     props: {
       productData: {

@@ -1,7 +1,7 @@
 // our-domain.com/
 import { MongoClient } from "mongodb";
 import ProductsList from "../components/ProductsItem/ProductsList";
-import { Fragment, useEffect } from "react";
+import { Fragment, Suspense } from "react";
 import Head from "next/head";
 import "mapbox-gl/dist/mapbox-gl.css";
 
@@ -12,7 +12,7 @@ const HomePage = (props) => {
         <title>Next JS</title>
         <meta name="description" content="Online Shopping" />
       </Head>
-      <ProductsList productsItem={props.products} />
+        <ProductsList productsItem={props.products} />
     </Fragment>
   );
 };

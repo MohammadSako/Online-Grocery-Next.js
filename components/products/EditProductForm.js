@@ -165,7 +165,7 @@ const EditProductForm = (props) => {
             </Col>
             <Col style={{ marginBottom: 15 }} className={imageInputClasses}>
               <Form.Group className="mb-3" controlId="formGridProductImage">
-                <Form.Label>Product image</Form.Label>
+                <Form.Label>Product Image URL</Form.Label>
                 <Form.Control
                   placeholder={props.image}
                   ref={imageInputRef}

@@ -25,7 +25,7 @@ const ContactUs = () => {
   return (
     <Container style={{ marginTop: 20 }}>
       <div ref={mapContainer} className="map-container" />
-      <Accordion defaultActiveKey="0" style={{ marginTop: 20 }}>
+      <Accordion defaultActiveKey="0" style={{ marginTop: 90 }}>
         <Accordion.Item eventKey="0">
           <Accordion.Header>Amman</Accordion.Header>
           <Accordion.Body>
