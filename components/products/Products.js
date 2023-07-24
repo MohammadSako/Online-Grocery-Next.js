@@ -9,10 +9,8 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { setCookie } from "nookies";
 import getCookies from "../../util/getCookies";
-import Link from "next/link";
 
 const Products = (props) => {
-
   const cookies = getCookies();
   const router = useRouter();
   const dispatch = useDispatch();
@@ -66,7 +64,7 @@ const Products = (props) => {
         },
       });
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       router.push("/");
     },
     [router]
@@ -74,7 +72,7 @@ const Products = (props) => {
 
   return (
     <Col style={{ marginTop: 30 }}>
-      <Card className={Classes.col}>
+      <Card className={!title ? Classes.skeleton : Classes.col}>
         <Card.Img
           className={Classes.image}
           onClick={showDetailHandler}

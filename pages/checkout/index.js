@@ -7,7 +7,7 @@ import Classes from "./index.module.css";
 import Container from "react-bootstrap/Container";
 import { Button } from "react-bootstrap";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
 const Checkout = () => {
   const cartItems = useSelector((state) => state.cart.items);
@@ -52,17 +52,19 @@ const Checkout = () => {
       {cartEmpty && (
         <Row style={{ margin: "10px 0 30px 0" }}>
           <Col>
-            <PayPalScriptProvider options={{ "client-id": "test" }}>
-              <PayPalButtons
-                style={{
-                  color: "blue",
-                  shape: "pill",
-                  label: "pay",
-                  height: 40,
-                  position: "relative",
-                }}
-              />
-            </PayPalScriptProvider>
+            <Suspense fallback={<p>Loading PayPal...</p>}>
+              <PayPalScriptProvider options={{ "client-id": "test" }}>
+                <PayPalButtons
+                  style={{
+                    color: "blue",
+                    shape: "pill",
+                    label: "pay",
+                    height: 40,
+                    position: "relative",
+                  }}
+                />
+              </PayPalScriptProvider>
+            </Suspense>
           </Col>
         </Row>
       )}

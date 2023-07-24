@@ -7,10 +7,10 @@ import store from "../store/index";
 import getCookies from "../util/getCookies";
 import { cartActions } from "../store/cart-slice";
 import { Suspense, useEffect } from "react";
-import Loading from "../components/products/layout/UI/Loading";
 
 const App = ({ Component, pageProps: { session, ...pageProps } }) => {
   const cookies = getCookies();
+ 
   useEffect(() => {
     const items = cookies?.["cartItems"]
       ? JSON.parse(cookies?.["cartItems"])
@@ -27,11 +27,12 @@ const App = ({ Component, pageProps: { session, ...pageProps } }) => {
       );
     });
   }, []);
+
   return (
     <Provider store={store}>
       <SessionProvider session={session}>
         <Layout>
-          <Suspense fallback={<Loading />}>
+          <Suspense fallback={<p>Loading..</p>}>
             <Component {...pageProps} />
           </Suspense>
         </Layout>

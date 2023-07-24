@@ -1,15 +1,18 @@
 //our-domain.com/news/news
-import { Fragment, Suspense, useCallback } from "react";
+import { Fragment, useCallback } from "react";
 import Head from "next/head";
 import { MongoClient, ObjectId } from "mongodb";
 // import ProductDetail from "../../components/products/ProductDetail";
 import { useRouter } from "next/router";
-import dynamic from 'next/dynamic'
-const ProductDetail = dynamic(() => import('../../components/products/ProductDetail'))
+import dynamic from "next/dynamic";
+import LoadingIndicator from "../LoadingIndicator";
+const ProductDetail = dynamic(() =>
+  import("../../components/products/ProductDetail")
+);
 
 const ProductDetails = (props) => {
   const router = useRouter();
-  
+
   const deleteProductHandler = useCallback(
     async (e) => {
       const response = await fetch("/api/delete-product", {
@@ -32,14 +35,14 @@ const ProductDetails = (props) => {
         <title>{props.productData.title}</title>
         <meta name="description" content={props.productData.description} />
       </Head>
-      <ProductDetail
-        image={props.productData.image}
-        title={props.productData.title}
-        price={props.productData.price}
-        description={props.productData.description}
-        id={props.productData.id}
-        onDeleteProduct={deleteProductHandler}
-      />
+        <ProductDetail
+          image={props.productData.image}
+          title={props.productData.title}
+          price={props.productData.price}
+          description={props.productData.description}
+          id={props.productData.id}
+          onDeleteProduct={deleteProductHandler}
+        />
     </Fragment>
   );
 };
@@ -56,7 +59,7 @@ export async function getStaticPaths() {
   const products = await productsCollection.find({}, { _id: 1 }).toArray();
   client.close();
   return {
-    fallback: "blocking", // true, false, blocking /=> this key tells NextJs whether your paths array contains all supported parameter values or just some of them.
+    fallback: "blocking", // true, false, blocking /=> this key tells NextJs whether your paths array contains all supported parameter values or just some of them. when fallback is set to true or to blocking, NextJS will not respond with a 404 page if it can't find the page immediately.
     paths: products.map((product) => ({
       params: {
         productId: product._id.toString(),
@@ -66,7 +69,6 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context) {
-  <h1>Loading.....</h1>
   //fetch data for a single product
   const productId = context.params.productId;
   //To connect to the server =>
