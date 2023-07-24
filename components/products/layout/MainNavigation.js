@@ -2,6 +2,8 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useSession, signOut, signIn } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
 import { redirect } from "react-router-dom";
+import { useRouter } from "next/router";
+
 import Link from "next/link";
 import HeaderCartButton from "./HeaderCartButton";
 import classes from "./MainNavigation.module.css";
@@ -25,6 +27,7 @@ const options = [
 
 function OffCanvasExample({ name, ...props }) {
   const dispatch = useDispatch();
+  const router = useRouter();
   const cartItems = useSelector((state) => state.cart.items);
   const cartQuantity = useSelector((state) => state.cart.totalQuantity);
   const totalItems = useSelector((state) => state.cart.totalQuantity);
@@ -47,6 +50,15 @@ function OffCanvasExample({ name, ...props }) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const toggleShow = () => setShow((s) => !s);
+
+  function viewCartHandler() {
+    router.push("/cart");
+    setShow(false);
+  }
+  function checkoutHandler() {
+    router.push("/checkout");
+    setShow(false);
+  }
 
   return (
     <>
@@ -111,22 +123,25 @@ function OffCanvasExample({ name, ...props }) {
                 </Col>
               </Row>
               <div className={classes.buttons}>
-                  <div className="d-grid gap-2 mt-2">
-                    <Button
-                      variant="outline-primary"
-                      onClick={() => deleteProductHandler(props)}
-                    >
-                      View Cart
-                    </Button>
-                  </div>
+                <div className="d-grid gap-2 mt-2">
+                  <Button
+                    variant="outline-primary"
+                    onClick={() => viewCartHandler(props)}
+                  >
+                    View Cart
+                  </Button>
+                </div>
               </div>
-              <Row className={classes.buttons}>
-                <Link href="/checkout">
-                  <div className="d-grid gap-2 mt-2">
-                    <Button variant="outline-primary">Checkout</Button>
-                  </div>
-                </Link>
-              </Row>
+              <div className={classes.buttons}>
+                <div className="d-grid gap-2 mt-2">
+                  <Button
+                    variant="outline-primary"
+                    onClick={() => checkoutHandler(props)}
+                  >
+                    Checkout
+                  </Button>
+                </div>
+              </div>
             </Row>
           )}
         </Offcanvas.Body>
