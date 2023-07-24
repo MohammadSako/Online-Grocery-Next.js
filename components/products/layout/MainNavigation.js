@@ -110,13 +110,16 @@ function OffCanvasExample({ name, ...props }) {
                   </div>
                 </Col>
               </Row>
-              <Row className={classes.buttons}>
-                <Link href="/cart" closeButton>
+              <div className={classes.buttons}>
                   <div className="d-grid gap-2 mt-2">
-                    <Button variant="outline-primary">View Cart</Button>
+                    <Button
+                      variant="outline-primary"
+                      onClick={() => deleteProductHandler(props)}
+                    >
+                      View Cart
+                    </Button>
                   </div>
-                </Link>
-              </Row>
+              </div>
               <Row className={classes.buttons}>
                 <Link href="/checkout">
                   <div className="d-grid gap-2 mt-2">

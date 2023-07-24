@@ -5,7 +5,6 @@ import { MongoClient, ObjectId } from "mongodb";
 // import ProductDetail from "../../components/products/ProductDetail";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
-import LoadingIndicator from "../LoadingIndicator";
 const ProductDetail = dynamic(() =>
   import("../../components/products/ProductDetail")
 );
