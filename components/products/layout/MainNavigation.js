@@ -39,6 +39,8 @@ function OffCanvasExample({ name, ...props }) {
       setCartEmpty(true);
     } else {
       setCartEmpty(false);
+      setShow(false);
+
     }
   }, [cartQuantity, cartItems]);
 
