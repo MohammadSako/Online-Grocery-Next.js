@@ -28,11 +28,13 @@ const Products = (props) => {
         image,
       })
     );
+
+    //to add the items to the cookie storage
     const cartItems = cookies?.["cartItems"]
       ? JSON.parse(cookies?.["cartItems"])
-      : [];
+      : []; //if the cookie has any items; to merge them with the new one.
     const addToCookies = [
-      ...cartItems,
+      ...cartItems, //old items in the cookie, merge them with the new one.
       {
         id,
         title,
@@ -41,6 +43,7 @@ const Products = (props) => {
         image,
       },
     ];
+    //to set the items in the cookie.
     setCookie(null, "cartItems", JSON.stringify(addToCookies), {
       maxAge: 86400,
       path: "/",
@@ -64,7 +67,6 @@ const Products = (props) => {
         },
       });
       const data = await response.json();
-      // console.log(data);
       router.push("/");
     },
     [router]
