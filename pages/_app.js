@@ -26,7 +26,7 @@ const App = ({ Component, pageProps: { session, ...pageProps } }) => {
         })
       );
     });
-  }, []);
+  }, [cookies]);
 
   return (
     <Provider store={store}>

@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import nookies from 'nookies'
 
 const cartSlice = createSlice({
   name: "cart",
@@ -40,6 +41,9 @@ const cartSlice = createSlice({
       } else {
         existingItem.quantity--;
         existingItem.totalPrice = existingItem.totalPrice - existingItem.price;
+      }
+      if (state.items.length === 0) {
+        nookies.destroy(null, 'cartItems')
       }
     },
 
