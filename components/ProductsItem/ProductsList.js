@@ -5,7 +5,6 @@ import React from "react";
 const ProductsList = (props) => {
   return (
     <Container>
-      <ul>
         <Row>
           {props.productsItem.map((product) => (
             <Products
@@ -18,7 +17,6 @@ const ProductsList = (props) => {
             />
           ))}
         </Row>
-      </ul>
     </Container>
   );
 };
