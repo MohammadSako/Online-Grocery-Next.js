@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { useSession, signOut, signIn } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import { redirect } from "react-router-dom";
 import Link from "next/link";
 import classes from "./MainNavigation.module.css";

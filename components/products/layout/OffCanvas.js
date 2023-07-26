@@ -1,13 +1,13 @@
 import { Button, Col, Offcanvas, Row } from "react-bootstrap";
 import HeaderCartButton from "./HeaderCartButton";
-import CartItem from "../../CartComponents/CartItem";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { cartActions } from "../../../store/cart-slice";
 import classes from "./MainNavigation.module.css";
+import { cartActions } from "../../../store/cart-slice";
+import CartItem from "../../CartComponents/CartItem";
 
-export function OffCanvas({ name, ...props }) {
+const OffCanvas = ({ name, ...props }) => {
   const dispatch = useDispatch();
   const router = useRouter();
   const cartItems = useSelector((state) => state.cart.items);
@@ -127,4 +127,5 @@ export function OffCanvas({ name, ...props }) {
       </Offcanvas>
     </>
   );
-}
+};
+export default OffCanvas;

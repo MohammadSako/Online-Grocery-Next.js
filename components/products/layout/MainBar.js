@@ -6,7 +6,7 @@ import classes from "./MainNavigation.module.css";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import { OffCanvas, OffCanvasExample } from "./OffCanvas";
+import OffCanvas from "./OffCanvas";
 
 export function MainBar() {
   const { data: session } = useSession();

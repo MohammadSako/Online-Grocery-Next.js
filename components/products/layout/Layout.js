@@ -1,9 +1,9 @@
 import { Container, Row } from "react-bootstrap";
-import Footer from "./Footer";
-import MainNavigation from "./MainNavigation";
-import { useSession, signIn } from "next-auth/react";
 import Link from "next/link";
+import { useSession, signIn } from "next-auth/react";
+import MainNavigation from "./MainNavigation";
 import classes from "./MainNavigation.module.css";
+import Footer from "./Footer";
 
 function Layout(props) {
   const { data: session } = useSession();

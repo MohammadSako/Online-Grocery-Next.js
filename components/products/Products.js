@@ -73,8 +73,8 @@ const Products = (props) => {
   );
 
   return (
-    <Col style={{ marginTop: 30 }}>
-      <Card className={!title ? Classes.skeleton : Classes.col}>
+    <Col style={{ marginTop: 20 }}>
+      <Card className={!title ? Classes.skeleton : Classes.col} style={{ width: '18rem' }}>
         <Card.Img
           className={Classes.image}
           onClick={showDetailHandler}

@@ -3,7 +3,6 @@
   opacity: .7;
   animation: skeleton-loading 1s linear infinite alternate;
   box-shadow: 0px 0px 6px 0px rgb(206, 206, 206);
-  width: 18rem;
 }
 @keyframes skeleton-loading {
   0% {
@@ -27,7 +26,6 @@
 
 .col {
   box-shadow: 0px 0px 6px 0px rgb(206, 206, 206);
-  width: 18rem;
 }
 
 .image {
