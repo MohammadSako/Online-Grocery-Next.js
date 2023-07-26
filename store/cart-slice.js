@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import nookies from "nookies";
-import { setCookie } from "nookies";
 
 const cartSlice = createSlice({
   name: "cart",

@@ -78,7 +78,7 @@ const EditProductForm = (props) => {
       image: enteredImage,
       price: enteredPrice,
       description: enteredDescription,
-      id: props.id
+      id: props.id,
     };
     props.onEditProduct(productData);
   };

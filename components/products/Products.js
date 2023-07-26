@@ -1,4 +1,4 @@
-import { useCallback} from "react";
+import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
@@ -75,7 +75,10 @@ const Products = (props) => {
 
   return (
     <Col style={{ marginTop: 20 }}>
-      <Card className={!title ? Classes.skeleton : Classes.col} style={{ width: '18rem' }}>
+      <Card
+        className={!title ? Classes.skeleton : Classes.col}
+        style={{ width: "18rem" }}
+      >
         <Card.Img
           className={Classes.image}
           onClick={showDetailHandler}
