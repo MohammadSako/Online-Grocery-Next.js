@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
@@ -11,7 +11,7 @@ import { setCookie } from "nookies";
 import getCookies from "../../util/getCookies";
 
 const Products = (props) => {
-  const cookies = getCookies();
+  const getCookie = getCookies();
   const router = useRouter();
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
@@ -30,8 +30,8 @@ const Products = (props) => {
     );
 
     //to add the items to the cookie storage
-    const cartItems = cookies?.["cartItems"]
-      ? JSON.parse(cookies?.["cartItems"])
+    const cartItems = getCookie?.["cartItems"]
+      ? JSON.parse(getCookie?.["cartItems"])
       : []; //if the cookie has any items; to merge them with the new one.
     const addToCookies = [
       ...cartItems, //old items in the cookie, merge them with the new one.
@@ -48,7 +48,8 @@ const Products = (props) => {
       maxAge: 86400,
       path: "/",
     });
-  }, [dispatch, id, title, price, description, image, cookies]);
+    console.log("from Product file");
+  }, [dispatch, id, title, price, description, image, getCookie]);
 
   function showDetailHandler() {
     router.push("/" + props.id);

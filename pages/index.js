@@ -12,9 +12,7 @@ const HomePage = (props) => {
         <title>Next JS</title>
         <meta name="description" content="Online Shopping" />
       </Head>
-      <Suspense fallback={<h1>Loading Products...</h1> }>
         <ProductsList productsItem={props.products} />
-      </Suspense>
     </Fragment>
   );
 };

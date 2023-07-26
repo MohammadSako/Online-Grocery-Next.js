@@ -80,7 +80,7 @@ const OffCanvas = ({ name, ...props }) => {
                     total: item.totalPrice,
                     price: item.price,
                     image: item.image,
-                    discription: item.discription,
+                    description: item.description,
                   }}
                 />
               ))}

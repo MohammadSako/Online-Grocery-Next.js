@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../../store/cart-slice";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
@@ -6,11 +6,16 @@ import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Row from "react-bootstrap/Row";
 import Classes from "./CartItem.module.css";
+import { setCookie } from "nookies";
+import getCookies from "../../util/getCookies";
+import { useEffect } from "react";
 
 const CartItem = (props) => {
   const dispatch = useDispatch();
-  const { name, quantity, total, price, id, image, discription } = props.item;
+  const getCookie = getCookies();
+  const cartItems = useSelector((state) => state.cart.items);
 
+  const { name, quantity, total, price, id, image, description } = props.item;
   const addItem = () => {
     dispatch(
       cartActions.addItemToCart({
@@ -19,15 +24,41 @@ const CartItem = (props) => {
         price,
         image,
         total,
-        discription,
+        description,
         quantity,
       })
     );
+
+    const cartItems = getCookie?.["cartItems"]
+      ? JSON.parse(getCookie?.["cartItems"])
+      : [];
+    const addToCookies = [
+      ...cartItems,
+      {
+        id,
+        name,
+        price,
+        description,
+        image,
+      },
+    ];
+    setCookie(null, "cartItems", JSON.stringify(addToCookies), {
+      maxAge: 86400,
+      path: "/",
+    });
   };
 
   const removeItem = () => {
     dispatch(cartActions.removeItemFromCart(id));
   };
+
+  //To add the new items to the cookie without removed items.
+  useEffect(() => {
+    setCookie(null, "cartItems", JSON.stringify(cartItems), {
+      maxAge: 86400,
+      path: "/",
+    });
+  }, [cartItems]);
 
   return (
     <>
