@@ -9,16 +9,10 @@ import { cartActions } from "../store/cart-slice";
 import { useEffect } from "react";
 
 const App = ({ Component, pageProps: { session, ...pageProps } }) => {
-  console.log("app1");
-
   const cookies = getCookies();
 
   useEffect(() => {
-    console.log("app2");
-
     return () => {
-      console.log("app3");
-
       const items = cookies?.["cartItems"]
         ? JSON.parse(cookies?.["cartItems"])
         : [];
@@ -47,5 +41,4 @@ const App = ({ Component, pageProps: { session, ...pageProps } }) => {
     </Provider>
   );
 };
-
 export default App;

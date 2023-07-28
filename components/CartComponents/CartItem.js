@@ -13,7 +13,6 @@ const CartItem = (props) => {
   const dispatch = useDispatch();
   const getCookie = getCookies();
   const cartItems = useSelector((state) => state.cart.items);
-  // console.log("old", cartItems);
   const { title, quantity, total, price, id, image, description } = props.item;
 
   const addItem = () => {
