@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
@@ -18,6 +18,14 @@ const Products = (props) => {
   const { data: session } = useSession();
   const { title, price, description, id, image } = props;
 
+  //to enable Delete Button when cart empty
+  const [clearCart, setClearCart] = useState(true);
+  useEffect(() => {
+    if (cartItems.length > 0) {
+      setClearCart(false);
+    } else setClearCart(true);
+  }, [cartItems]);
+
   const addToCartHandler = useCallback(() => {
     dispatch(
       cartActions.addItemToCart({
@@ -28,13 +36,12 @@ const Products = (props) => {
         image,
       })
     );
-
     //to add the items to the cookie storage
-    const cartItems = getCookie?.["cartItems"]
+    const cartItem = getCookie?.["cartItems"]
       ? JSON.parse(getCookie?.["cartItems"])
       : []; //if the cookie has any items; to merge them with the new one.
     const addToCookies = [
-      ...cartItems, //old items in the cookie, merge them with the new one.
+      ...cartItem, //old items in the cookie, merge them with the new one.
       {
         id,
         title,
@@ -48,7 +55,6 @@ const Products = (props) => {
       maxAge: 86400,
       path: "/",
     });
-    console.log("from Product file");
   }, [dispatch, id, title, price, description, image, getCookie]);
 
   function showDetailHandler() {
@@ -114,22 +120,32 @@ const Products = (props) => {
           </div>
           <div className="d-grid gap-2 mt-2">
             <Button
-              onClick={() => editProductHandler(props)}
-              className={!session ? Classes.disabledButtomD : Classes.buttomE}
+              className={
+                !session || !clearCart
+                  ? Classes.disabledButtomD
+                  : Classes.buttomE
+              }
               variant="white"
+              onClick={() => editProductHandler(props)}
             >
               {!session && "Login to Edit"}
-              {session && "Edit"}
+              {session && !clearCart && "Clear the Cart to Edit"}
+              {session && clearCart && "Edit"}
             </Button>
           </div>
           <div className="d-grid gap-2 mt-2">
             <Button
-              className={!session ? Classes.disabledButtomD : Classes.buttomD}
+              className={
+                !session || !clearCart
+                  ? Classes.disabledButtomD
+                  : Classes.buttomD
+              }
               variant="white"
               onClick={() => deleteProductHandler(props)}
             >
               {!session && "Login to Delete"}
-              {session && "Delete"}
+              {session && !clearCart && "Clear the Cart to Delete"}
+              {session && clearCart && "Delete"}
             </Button>
           </div>
         </Card.Body>

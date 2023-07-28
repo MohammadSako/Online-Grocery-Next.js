@@ -90,7 +90,7 @@ const Checkout = () => {
                         alt=""
                       ></img>
                     </td>
-                    <td>{item.name}</td>
+                    <td>{item.title}</td>
                     <td>{item.quantity}</td>
                     <td>{item.price}</td>
                   </tr>

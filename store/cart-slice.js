@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+// import { setCookie } from "nookies";
 import nookies from "nookies";
 
 const cartSlice = createSlice({
@@ -22,8 +23,9 @@ const cartSlice = createSlice({
             price: newItem.price,
             quantity: 1,
             totalPrice: newItem.price,
-            name: newItem.title,
+            title: newItem.title,
             image: newItem.image,
+            description: newItem.description,
           },
         ];
       } else {
@@ -42,7 +44,6 @@ const cartSlice = createSlice({
         existingItem.quantity--;
         existingItem.totalPrice = existingItem.totalPrice - existingItem.price;
       }
-
       if (state.items.length === 0) {
         nookies.destroy(null, "cartItems");
       }

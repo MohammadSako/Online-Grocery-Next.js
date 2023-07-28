@@ -8,19 +8,19 @@ import Row from "react-bootstrap/Row";
 import Classes from "./CartItem.module.css";
 import { setCookie } from "nookies";
 import getCookies from "../../util/getCookies";
-import { useEffect } from "react";
 
 const CartItem = (props) => {
   const dispatch = useDispatch();
   const getCookie = getCookies();
   const cartItems = useSelector((state) => state.cart.items);
+  // console.log("old", cartItems);
+  const { title, quantity, total, price, id, image, description } = props.item;
 
-  const { name, quantity, total, price, id, image, description } = props.item;
   const addItem = () => {
     dispatch(
       cartActions.addItemToCart({
         id,
-        name,
+        title,
         price,
         image,
         total,
@@ -29,17 +29,18 @@ const CartItem = (props) => {
       })
     );
 
-    const cartItems = getCookie?.["cartItems"]
+    const cartItem = getCookie?.["cartItems"]
       ? JSON.parse(getCookie?.["cartItems"])
       : [];
     const addToCookies = [
-      ...cartItems,
+      ...cartItem,
       {
         id,
-        name,
+        title,
         price,
         description,
         image,
+        quantity,
       },
     ];
     setCookie(null, "cartItems", JSON.stringify(addToCookies), {
@@ -52,14 +53,6 @@ const CartItem = (props) => {
     dispatch(cartActions.removeItemFromCart(id));
   };
 
-  //To add the new items to the cookie without removed items.
-  useEffect(() => {
-    setCookie(null, "cartItems", JSON.stringify(cartItems), {
-      maxAge: 86400,
-      path: "/",
-    });
-  }, [cartItems]);
-
   return (
     <>
       <Row className={Classes.row}>
@@ -70,7 +63,7 @@ const CartItem = (props) => {
         </Col>
         <Col>
           <Card.Title>
-            <span style={{ color: "Red" }}>{name}</span>{" "}
+            <span style={{ color: "Red" }}>{title}</span>{" "}
           </Card.Title>
           <Card.Text className="mb-2 text-muted">
             {quantity} X{" "}
