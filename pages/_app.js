@@ -1,4 +1,4 @@
-import { Provider, useSelector } from "react-redux";
+import { Provider } from "react-redux";
 import Layout from "../components/products/layout/Layout";
 import "../styles/globals.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -29,7 +29,7 @@ const App = ({ Component, pageProps: { session, ...pageProps } }) => {
         );
       });
     };
-  }, [cookies]);
+  }, []);
 
   return (
     <Provider store={store}>
