@@ -54,7 +54,7 @@ const Products = (props) => {
     setCookie(null, "cartItems", JSON.stringify(addToCookies), {
       maxAge: 86400,
       path: "/",
-      secure: true,
+      sameSite: Lax
     });
   }, [dispatch, id, title, price, description, image, getCookie]);
 
