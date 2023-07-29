@@ -52,7 +52,6 @@ const cartSlice = createSlice({
         setCookie(null, "cartItems", JSON.stringify(state.items), {
           maxAge: 86400,
           path: "/",
-          httpOnly: true,
         });
       }
 
