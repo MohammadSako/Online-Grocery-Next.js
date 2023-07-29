@@ -8,6 +8,7 @@ import Row from "react-bootstrap/Row";
 import Classes from "./CartItem.module.css";
 import { setCookie } from "nookies";
 import getCookies from "../../util/getCookies";
+import { useCallback, useEffect, useState } from "react";
 
 const CartItem = (props) => {
   const dispatch = useDispatch();
@@ -15,7 +16,7 @@ const CartItem = (props) => {
   const cartItems = useSelector((state) => state.cart.items);
   const { title, quantity, total, price, id, image, description } = props.item;
 
-  const addItem = () => {
+  const addItem = useCallback(() => {
     dispatch(
       cartActions.addItemToCart({
         id,
@@ -46,7 +47,17 @@ const CartItem = (props) => {
       maxAge: 86400,
       path: "/",
     });
-  };
+  }, [
+    id,
+    title,
+    price,
+    description,
+    image,
+    quantity,
+    getCookie,
+    dispatch,
+    total,
+  ]);
 
   const removeItem = () => {
     dispatch(cartActions.removeItemFromCart(id));
