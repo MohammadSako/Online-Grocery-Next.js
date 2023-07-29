@@ -46,6 +46,7 @@ const CartItem = (props) => {
     setCookie(null, "cartItems", JSON.stringify(addToCookies), {
       maxAge: 86400,
       path: "/",
+      httpOnly: true,
     });
   }, [
     id,
